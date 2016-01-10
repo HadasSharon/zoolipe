@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
+<head>
+
+
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Author" content="Broadleaf Commerce" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Broadleaf Admin</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"
+	type="text/css" />
+<!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/css/font-awesome-ie7.min.css}" />
+    <![endif]-->
+
+<link rel="stylesheet" href="/admin/css/admin/foundation.css" />
+
+<link rel="stylesheet" href="/admin/css/admin/offcanvas.css" />
+<link rel="stylesheet" href="/admin/css/admin/redactor.css" />
+<link rel="stylesheet" href="/admin/css/admin/responsive-tables.css" />
+<link rel="stylesheet" href="/admin/css/admin/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery-ui-1.10.2.custom.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="/admin/css/admin/spectrum.css" />
+<link rel="stylesheet" href="/admin/css/admin/blc-admin.css" />
+<link rel="stylesheet" href="/admin/css/admin/components.css" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script language="javascript" type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript"
+	src="/admin/js/admin/lib/modernizr.foundation.js"></script>
+ <script>
+	var loadFile = function(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('output3');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+</script>
+<script type="text/javascript">
+	function PreviewImage() {
+		pdffile = document.getElementById("pdfFile").files[0];
+		pdffile_url = URL.createObjectURL(pdffile);
+		$('#viewer').attr('src', pdffile_url);
+	}
+</script> 
+</head>
+<body>
+
+
+	<div class="row" align="left" style="height: 650px;">
+
+
+		<h2>Edit Product</h2>
+
+
+		<div class="container">
+
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="active"><a href="#home" role="tab" data-toggle="tab">
+						<icon class="fa fa-home"></icon> General
+				</a></li>
+				<li><a href="#features" role="tab" data-toggle="tab"> <icon
+							class="fa fa-home"></icon> Features And Description
+				</a></li>
+				<li><a href="#profile" role="tab" data-toggle="tab"> <i
+						class="fa fa-user"></i> Marketing
+				</a></li>
+				<li><a href="#messages" role="tab" data-toggle="tab"> <i
+						class="fa fa-envelope"></i> Image And DataSheet
+				</a></li>
+				<li><a href="#settings" role="tab" data-toggle="tab"> <i
+						class="fa fa-cog"></i> Shipping
+				</a></li>
+			</ul>
+			<blc:form id="cart_promo" method="POST"
+				th:action="@{/productCatalog/update}" enctype="multipart/form-data">
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane fade active in row" id="home"
+						style="height: 400px; width: 900px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+						<div style="margin-left: 30px">
+							<h5>General</h5>
+							<input type="hidden" id="productCatalogId"
+								name="productCatalogId"
+								th:field="*{productCatalog.productCatalogId}"></input> <label
+								for="productName"><span th:utext="Product+' '"> </span>:</label>
+							<input id="productName" name="productName" type="text" value=""
+								autocomplete="off" th:field="*{productCatalog.productName}" />
+							<label for="manufacturerPart"><span
+								th:utext="Manufacturer+' '+Part"></span>:</label> <input
+								id="manufacturerPart" name="manufacturerPart" type="text"
+								th:field="*{productCatalog.manufacturerPart}" autocomplete="off" />
+							<label for="semikartPart"><span
+								th:utext="Semikart+' '+Part"></span>:</label> <input id="semikartPart"
+								name="semikartPart" type="text"
+								th:field="*{productCatalog.semikartPart}" autocomplete="off" />
+							<label for="catageryId"><span th:utext="Category"></span>:</label>
+							<select id="categoryId" name="categoryId"
+								th:field="*{productCatalog.categoryId}">
+
+								<option th:each="category: ${categoryList}"
+									th:value="${category.catagoryId}"
+									th:text="${category.catagoryName}"></option>
+							</select><br /> <br /> <label><span th:utext="Manufacturer"></span>:</label>
+							<select id="manufacturerId" name="manufacturerId"
+								th:field="*{productCatalog.manufacturerId}">
+
+								<option th:each="manufacturer: ${manufacturerList}"
+									th:value="${manufacturer.manufacturerId}"
+									th:text="${manufacturer.manuFacturerName}"></option>
+							</select> <br /> <br /> <label><span th:utext="RoHS"></span>:<br />Complaint
+								<input type="radio" value="RoHS Compliant" name="rohs"
+								th:field="*{productCatalog.rohs}" />&nbsp;&nbsp;&nbsp;Complaint
+								by exemption<input type="radio"
+								value="RoHS Compliant By Exemption" name="rohs"
+								th:field="*{productCatalog.rohs}" /></label> <br /> <label><span
+								th:utext="Type"> </span>:</label> <input id="type" name="type"
+								th:field="*{productCatalog.type}" type="text" autocomplete="off" />
+							<label><span th:utext="Brand"> </span>:</label> <input id="brand"
+								name="brand" th:field="*{productCatalog.brand}" type="text"
+								autocomplete="off" /> <label for="apiName"><span
+								th:utext="APIName"></span>:</label> <select id="apiName" name="apiName"
+								th:field="*{productCatalog.apiName}">
+
+								<option value="Mouser">Mouser</option>
+								<option value="Manual">Manual</option>
+							</select>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="features"
+						style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+						<div style="margin-left: 20px">
+							<h5>Description And Features</h5>
+							<br /> <label for="description"><span
+								th:utext="Description"></span>:</label>
+							<div class="twelve indented-form-value">
+								<textarea class="redactor" name="description" id="description"
+									th:field="*{productCatalog.description}"></textarea>
+							</div>
+							<label><span th:utext="Features"></span>:</label>
+							<div class="twelve indented-form-value">
+								<textarea class="redactor" name="features" id="features"
+									th:field="*{productCatalog.features}"></textarea>
+							</div>
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="profile"
+						style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+						<div style="margin-left: 20px">
+							<h5>Marketing</h5>
+
+							<label><span th:utext="NewProduct"></span>:<br />Yes <input
+								type="radio" value="Y" name="isNewProduct"
+								th:field="*{productCatalog.isNewProduct}" />&nbsp;&nbsp;&nbsp;&nbsp;No<input
+								type="radio" value="N" name="isNewProduct"
+								th:field="*{productCatalog.isNewProduct}" /></label> <br /> <br /> <label><span
+								th:utext="Featured+' '+Product"></span>:<br />Yes <input
+								type="radio" value="Y" name="isFeaturedProduct"
+								th:field="*{productCatalog.isFeaturedProduct}" />&nbsp;&nbsp;&nbsp;&nbsp;No<input
+								type="radio" value="N" name="isFeaturedProduct"
+								th:field="*{productCatalog.isFeaturedProduct}" /></label> <br /> <br />
+
+							<label for="hotDeal"><span th:utext="HotDeal"></span>:<br />Yes
+								<input type="radio" value="Y" name="hotDeal"
+								th:field="*{productCatalog.hotDeal}" />No<input type="radio"
+								value="N" name="hotDeal" th:field="*{productCatalog.hotDeal}" /></label>
+							<br /> <br /> <label><span th:utext="Popular"></span>:<br />Yes
+								<input type="radio" value="Y" name="popular"
+								th:field="*{productCatalog.popular}" />No<input type="radio"
+								value="N" name="popular" th:field="*{productCatalog.popular}" /></label>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="messages"
+						style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+						<div style="margin-left: 20px">
+							<h5>Uplaod Image</h5>
+
+							<img th:src="@{${productCatalog.imageUrl}}" id="output3" style="width: 100px; height: 100px;"></img> <input
+								type="file" name="imageFile" id="imgInp" accept="image/*" onchange="loadFile(event)" /> <br />
+							<br /> <br /> <br />
+							<h5>Uplaod DataSheet</h5>
+							<div style="clear: both">
+								<iframe id="viewer" frameborder="1" scrolling="yes" width="500"
+									height="300" th:src="${productCatalog.dataSheet}"></iframe>
+							</div>
+							<input type="file" name="pdfFile" id="pdfFile"
+								onchange="PreviewImage();" /> 
+
+						</div>
+						<input id="imageUrl" name="imageUrl" type="hidden"
+							autocomplete="off" th:field="*{productCatalog.imageUrl}" /> <input
+							id="dataSheet" name="dataSheet" type="hidden" autocomplete="off"
+							th:field="*{productCatalog.dataSheet}" />
+					</div>
+					<div class="tab-pane fade" id="settings"
+						style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+						<div style="margin-left: 20px">
+							<h5>Shipping</h5>
+							<label for="fullFillmentType"><span
+								th:utext="FullFillmentType"></span>: <select
+								id="fullFillmentType" name="fullFillmentType"
+								th:field="*{productCatalog.fullFillmentType}">
+
+									<option value="Digital">Digital</option>
+									<option value="Digital">Gift Card</option>
+									<option value="Physical PickUp">Physical PickUp</option>
+									<option value="Physical PickUp or Ship">Physical
+										PickUp or Ship</option>
+									<option value="Physical Ship">Physical Ship</option>
+							</select></label> <br /> <br /> <label for="length"><span
+								th:utext="Length"></span>:</label> <input id="length" name="length"
+								type="text" autocomplete="off"
+								th:field="*{productCatalog.length}" /> <br /> <br /> <label
+								for="width"><span th:utext="Width"></span>:</label> <input
+								id="width" name="width" type="text"
+								th:field="*{productCatalog.width}" autocomplete="off" /> <br />
+							<br /> <label for="height"><span th:utext="Height"></span>:</label>
+							<input id="height" name="height" type="text"
+								th:field="*{productCatalog.height}" autocomplete="off" /> <br />
+							<br /> <label><span th:utext="Dimension+' '+Units"></span>:<br />Meters
+								<input type="radio" value="meters" name="dimensionUnits"
+								th:field="*{productCatalog.dimensionUnits}" />&nbsp;&nbsp;&nbsp;&nbsp;Centi
+								Meters<input type="radio" value="centiMeters"
+								name="dimensionUnits"
+								th:field="*{productCatalog.dimensionUnits}" />
+								&nbsp;&nbsp;&nbsp;&nbsp;Feets <br /> <br /> <br /> <input
+								type="radio" value="feets" name="dimensionUnits"
+								th:field="*{productCatalog.dimensionUnits}" /></label><label
+								for="weight"><span th:utext="Weight"></span>:</label> <input
+								id="weight" name="weight" type="text" value=""
+								autocomplete="off" th:field="*{productCatalog.weight}" /> <br />
+							<br /> <label><span th:utext="Weight+' '+Units"></span>:<br />KG
+								<input type="radio" value="kg" name="weightUnits"
+								th:field="*{productCatalog.weightUnits}" />&nbsp;&nbsp;&nbsp;&nbsp;Pounds
+								<input type="radio" value="pounds" name="weightUnits"
+								th:field="*{productCatalog.weightUnits}" /> </label><br />
+						</div>
+					</div>
+				</div>
+				<input type="submit" value="Update"
+					class="button small radius dark right add-main-entity" />
+				<!-- 	<a class="button small dark radius"
+					th:href="'/admin/productCatalog/deleteProductCatalog?id='+${id}">
+					&nbsp;Delete </a>
+ -->
+			</blc:form>
+
+
+		</div>
+
+	</div>
+
+
+
+	<footer> <script>
+		var BLC_USER_PREFS = {};
+	</script> <script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.cookie.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.move.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.swipe.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.accordion.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.alerts.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.buttons.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.clearing.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.joyride.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.magellan.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.mediaQueryToggle.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.navigation.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.orbit.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tabs.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tooltips.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.topbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.placeholder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mousewheel.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ba-dotimeout.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-1.10.2.custom.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-timepicker-addon.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.iframe-transport.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ui.widget.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.autosize.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/plugins/spectrum.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontfamily.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontcolor.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontsize.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/selectasset.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/video.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/table.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/redactor.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/blc-conditions-builder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/typeahead.bundle.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC-system-property.js"></script>
+	<script type="text/javascript" src="/admin/js/blc-dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-history.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/blc-admin-breadcrumb.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/messages_en.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/accordion.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/modal.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/imagezoom.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/entityForm.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/entityForm-generatedUrl.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/translations.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/assetSelector.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-operators.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-options.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/ruleBuilder.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/listGrid.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-filter.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-paginate.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/typeahead.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/sessionTimer.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/catalog/product.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/catalog/offer.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/catalog/category.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/menuItem.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-init.js"></script>
+
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<div class="row" style="overflow: scroll; height: 500px;">
+	<div align="right">
+		<blc:form id="category" method="GET" th:action="@{/catogory/close}">
+			<input type="submit" value="Close"
+				class="button small radius dark right add-main-entity" />
+		</blc:form>
+	</div>
+	<div class="twelve columns">
+		<blc:form id="addMainCategory" method="POST"
+			th:action="@{/catogory/save}">
+			<table>
+
+
+				<label for="catagoryName"><span th:utext="Category+' '+Name">
+				</span>:</label>
+				<input id="catagoryName" name="catagoryName" type="text" value=""
+					autocomplete="off" />
+
+				<label for="mainSubcatagoryId"><span
+					th:utext="Main+' '+SubCategory+' '+Name"> </span>:</label>
+				<select id="mainSubcatagoryId" name="mainSubcatagoryId">
+					<option value="SELECT">------------SELECT------------------</option>
+					<option th:each="mainSubCategory: ${mainSubCategoryList}"
+						th:value="${mainSubCategory.mainSubCatagoryId}"
+						th:text="${mainSubCategory.mainSubCatagoryName}"></option>
+				</select>
+
+
+
+
+				<input type="submit" value="Save"
+					class="button small radius dark right add-main-entity" />
+
+				<!-- <button class="button small radius dark right add-main-entity"
+											data-url="/admin/category/close" type="button">
+					<i class="icon-plus"></i>&nbsp; Close
+				</button>  -->
+			</table>
+
+
+		</blc:form>
+
+	</div>
+</div>

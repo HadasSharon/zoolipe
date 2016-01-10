@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
+<head>
+
+
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Author" content="Broadleaf Commerce" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Broadleaf Admin</title>
+
+<!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/css/font-awesome-ie7.min.css}" />
+    <![endif]-->
+
+<link rel="stylesheet" href="/admin/css/admin/foundation.css" />
+<link rel="stylesheet" href="/admin/css/admin/bootstrap.css" />
+<link rel="stylesheet" href="/admin/css/admin/offcanvas.css" />
+<link rel="stylesheet" href="/admin/css/admin/redactor.css" />
+<link rel="stylesheet" href="/admin/css/admin/responsive-tables.css" />
+<link rel="stylesheet" href="/admin/css/admin/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery-ui-1.10.2.custom.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="/admin/css/admin/spectrum.css" />
+<link rel="stylesheet" href="/admin/css/admin/blc-admin.css" />
+<link rel="stylesheet" href="/admin/css/admin/components.css" />
+
+<script type="text/javascript"
+	src="/admin/js/admin/lib/modernizr.foundation.js"></script>
+<script>
+
+
+var loadFile = function(event) {
+  var reader = new FileReader();
+  reader.onload = function(){
+    var output = document.getElementById('output');
+    output.src = reader.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+};
+</script>
+
+</head>
+
+<body>
+	<div class="section-container">
+
+		<section>
+		<div class="row">
+			<div class="twelve columns">
+				<div id="sectionKey" style="display: none;">category</div>
+				<div class="entity-edit">
+					<blc:form id="editManufacturer" method="POST"
+						th:action="@{/manufacturer/update}" enctype="multipart/form-data">
+						<input type='hidden' id='params_' name='params' value='${params}' />
+						<input type="hidden" id="csrftoken_" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+						<table>
+							<input type="hidden" id="manufacturerId" name="manufacturerId"
+								th:field="*{manufacturer.manufacturerId}"></input>
+							<label for="manuFacturerName"><span
+								th:utext="ManufacturerName"> </span>:</label>
+							<input id="manuFacturerName" name="manuFacturerName" type="text"
+								autocomplete="off" th:field="*{manufacturer.manuFacturerName}" />
+							<label for="imageUrl"><span th:utext="ImageUrl"> </span>:</label>
+							<img th:src="${manufacturer.imageUrl}" id="output"
+								style="width: 100px; height: 100px;"></img>
+
+							<input type="file" name="file" id="imgInp" accept="image/*" onchange="loadFile(event)"/>
+
+							<label for="mid"><span th:utext="ManufacturerID"></span>:</label>
+							<input id="mid" name="mid" type="text"
+								th:field="*{manufacturer.mid}" autocomplete="off" />
+
+
+							<input type="submit" value="Update"
+								class="button small radius dark right add-main-entity"
+								id="downlad" />
+							<a class="button small dark radius"
+								th:href="'/admin/manufacturer/deleteManufacturer?id='+${id}">
+								&nbsp;Delete </a>
+						</table>
+					</blc:form>
+				</div>
+			</div>
+		</div>
+		</section>
+	</div>
+
+	<footer> <script>
+		//<![CDATA[
+		window.jQuery
+				|| document
+						.write('<script src="/admin/js/lib/jquery-1.9.1.js"><\/script>');
+		//]]>
+	</script> <script>
+		var BLC_USER_PREFS = {};
+	</script> <script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.cookie.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.move.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.swipe.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.accordion.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.alerts.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.buttons.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.clearing.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.joyride.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.magellan.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.mediaQueryToggle.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.navigation.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.orbit.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tabs.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tooltips.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.topbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.placeholder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mousewheel.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ba-dotimeout.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-1.10.2.custom.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-timepicker-addon.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.iframe-transport.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ui.widget.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.autosize.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/plugins/spectrum.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontfamily.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontcolor.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontsize.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/selectasset.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/video.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/table.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/redactor.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/bootstrap.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/blc-conditions-builder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/typeahead.bundle.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC-system-property.js"></script>
+	<script type="text/javascript" src="/admin/js/blc-dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-history.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/blc-admin-breadcrumb.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/messages_en.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/accordion.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/modal.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/imagezoom.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/entityForm.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/entityForm-generatedUrl.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/translations.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/assetSelector.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-operators.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-options.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/ruleBuilder.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/listGrid.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-filter.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-paginate.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/typeahead.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/sessionTimer.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/catalog/product.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/catalog/offer.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/catalog/category.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/menuItem.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-init.js"></script>
+
+
+
+
+	</footer>
+
+
+</body>
+</html>

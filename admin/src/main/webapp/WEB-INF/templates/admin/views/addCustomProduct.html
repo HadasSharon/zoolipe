@@ -1,0 +1,101 @@
+
+<button id="closeButton"
+	onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>close</button>
+<div class="row" style="overflow: scroll; height: 500px;">
+
+	<div class="twelve columns">
+
+		<blc:form id="cart_promo" method="POST" th:action="@{/test/save}">
+			<table>
+				<label for="semikartPart"><span th:utext="SemikartPart">
+				</span>:</label>
+				<input id="semikartPart" name="semikartPart" type="text" value=""
+					autocomplete="off" />
+				<label for="manufacturerPart"><span
+					th:utext="ManufacturerPart"></span>:</label>
+				<input id="manufacturerPart" name="manufacturerPart" type="text"
+					value="" autocomplete="off" />
+
+				<label for="catageryId"><span th:utext="Category"></span>:</label>
+				<select id="catagoryId" name="catagoryId">
+					<option value="select">-----Select-----------</option>
+					<option value="1">RF Modules Long-Range 900MHz Modem w/
+						Accessories</option>
+					<option value="2">Bluetooth / 802.15.1 Development Tools
+						Long range BT Dev. Kit</option>
+					<option value="3">Zigbee / 802.15.4 Modules XBee ZB S2C TH
+						Wire Antenna</option>
+					<!-- <option th:each="locale : ${locales}"
+            th:value="${locale.key}"
+            th:text="${locale.value}">Englishy</option> -->
+				</select>
+				<textarea class="form-control" rows="2" style="margin-top: 10px;"
+					placeholder="Sonstige Bemerkungen" name="description">
+    </textarea>
+				<label for="imageUrl"><span th:utext="ImageUrl"></span>:</label>
+				<input id="imageUrl" name="imageUrl" type="text" value=""
+					autocomplete="off" />
+				<label for="dataSheet"><span th:utext="DataSheet"></span>:</label>
+				<input id="dataSheet" name="dataSheet" type="text" value=""
+					autocomplete="off" />
+
+				<label for="manufacturerId"><span th:utext="Manufacturer"></span>:</label>
+				<select id="manufacturerId" name="manufacturerId">
+					<option value="select">-----Select-----------</option>
+					<option value="1">Texas Instruments</option>
+					<option value="2">Silicon Labs</option>
+					<option value="3">Microchip Technology</option>
+
+				</select>
+				<label for="supplierId"><span th:utext="Supplier"></span>:</label>
+				<select id="supplierId" name="supplierId">
+					<option value="select">-----Select-----------</option>
+					<option value="1">abc</option>
+				</select>
+				<label for="stock"><span th:utext="Stock"></span>:</label>
+				<select id="stock" name="stock">
+					<option value="select">-----Select-----------</option>
+					<option value="1">1</option>
+
+
+				</select>
+				<label for="minu"><span th:utext="Min."></span>:</label>
+				<select id="minu" name="minu">
+					<option value="select">-----Select-----------</option>
+					<option value="1">1</option>
+
+
+				</select>
+				<label for="mult"><span th:utext="Mult."></span>:</label>
+				<select id="mult" name="mult">
+					<option value="select">-----Select-----------</option>
+					<option value="1">1</option>
+
+
+				</select>
+
+
+				<input type="submit" id="addAccount" name="addAccount"
+					value="submit" class="small red" />
+				<div class="five columns">
+					<div style="float: right;">
+						<button class="button small radius dark right add-main-entity"
+							onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'
+							type="button">
+
+							<i class="icon-plus"></i>&nbsp; Add product
+						</button>
+
+
+
+						<br />
+
+					</div>
+				</div>
+
+			</table>
+
+
+		</blc:form>
+	</div>
+</div>

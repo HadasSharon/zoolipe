@@ -1,0 +1,63 @@
+<script>
+	var loadFile = function(event) {
+		alert("as");
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('output1');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+</script>
+
+<div class="row" style="overflow: scroll; height: 500px;">
+	<div align="right">
+		<blc:form id="addMainCategory" method="GET"
+			th:action="@{/mainCategory/close}">
+
+			<input type="submit" value="Close"
+				class="button small radius dark right add-main-entity" />
+		</blc:form>
+	</div>
+	<div class="twelve columns">
+
+		<blc:form id="addMainCategory" method="POST"
+			th:action="@{/mainCategory/save}">
+			<table>
+				<label for="maincatagoryName"><span
+					th:utext="MainCategoryName"> </span>:</label>
+				<input id="maincatagoryName" name="maincatagoryName" type="text"
+					value="" autocomplete="off" />
+
+				<img id="output1" style="width: 100px; height: 100px;"></img>
+
+				<input type="file" name="file" id="imgInp" accept="image/*"
+					onchange="loadFile(event)" />
+
+
+
+				<label for="includeInSubmenu1"><span
+					th:utext="IncludeInSubMenu"></span>:<br />Yes <input type="radio"
+					value="Y" name="includeInSubmenu" />No<input type="radio"
+					value="N" name="includeInSubmenu" /></label>
+				<label for="mainMenu"><span th:utext="MainMenuName">
+				</span>:</label>
+				<select id="mainMenu" name="mainMenu">
+					<option value="Select">Select</option>
+					<option value="Products">Products</option>
+					<option value="Application">Application</option>
+				</select>
+				<input type="submit" value="Save"
+					class="button small radius dark right add-main-entity" />
+
+				<!-- <button class="button small radius dark right add-main-entity"
+											data-url="/admin/mainCategory/close" type="button">
+					<i class="icon-plus"></i>&nbsp; Close
+				</button>  -->
+			</table>
+
+
+		</blc:form>
+
+	</div>
+</div>

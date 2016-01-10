@@ -1,0 +1,303 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+
+<head>
+
+
+<script src="ModalPopupWindow.js"></script>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Author" content="Broadleaf Commerce" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Broadleaf Admin</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"
+	type="text/css" />
+
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- script language="javascript" type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.1/jquery.dataTables.min.js"></script> -->
+<script language="javascript" type="text/javascript"
+	src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+
+<script language="javascript" type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="/admin/css/admin/foundation.css" />
+<link rel="stylesheet" href="/admin/css/admin/bootstrap.css" />
+<link rel="stylesheet" href="/admin/css/admin/offcanvas.css" />
+<link rel="stylesheet" href="/admin/css/admin/redactor.css" />
+<link rel="stylesheet" href="/admin/css/admin/responsive-tables.css" />
+<link rel="stylesheet" href="/admin/css/admin/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery-ui-1.10.2.custom.css" />
+<link rel="stylesheet"
+	href="/admin/css/admin/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="/admin/css/admin/spectrum.css" />
+<link rel="stylesheet" href="/admin/css/admin/blc-admin.css" />
+<link rel="stylesheet" href="/admin/css/admin/components.css" />
+<script type="text/javascript"
+	src="/admin/js/admin/lib/modernizr.foundation.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#tableSearch').dataTable({
+			"ordering" : false,
+			"bLengthChange" : true,
+			"scrollY" : "400px",
+			"scrollCollapse" : true,
+			"scrollX" : true,
+			"bFilter" : true,
+			"info" : true,
+			"aLengthMenu" : [ 25, 50, 75, 100, 150, 200 ],
+			"iDisplayLength" : 20
+		});
+	});
+</script>
+
+</head>
+
+<body class="off-canvas">
+	<div class="container">
+		<div class="content row">
+			<div class="section-container">
+				<div class="sticky-container"></div>
+				<div class="sticky-container-padding" style="display: none;"></div>
+				<section class="main">
+				<div class="row">
+					<div class="twelve columns">
+						<div id="sectionKey" style="display: none;">Product</div>
+						<div class="listgrid-container" id="main">
+
+							<div class="row">
+								<div class="seven columns"></div>
+								<div class="five columns">
+									<div style="float: right;">
+										<button class="button small radius dark right add-main-entity"
+											data-url="/admin/productCatalog/add" type="button">
+
+											<i class="icon-plus"></i>&nbsp; Add Product
+										</button>
+										<br />
+
+									</div>
+								</div>
+							</div>
+							<div class="listgrid-toolbar"></div>
+
+
+
+
+
+							<div class="listgrid-header-wrapper">
+								<table data-listgridtype="main" id="tableSearch">
+									<thead>
+										<tr>
+											<th scope="col" 
+												style="width: 100px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">SI.No.</div>
+												</div></th>
+											<th scope="col" 
+												style="width: 200px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">Manufacturer Part</div>
+												</div></th>
+											<th scope="col" 
+												style="width: 200px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">Semikart Part</div>
+												</div></th>
+											<th scope="col" 
+												style="width: 200px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">Image</div>
+												</div></th>
+											<th scope="col" 
+												style="width: 200px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">Category</div>
+												</div></th>
+											<th scope="col" 
+												style="width: 200px; padding-right: 20px;"
+												class="explicit-size"><span class="listgrid-icon"></span>
+												<div href="#" class="listgrid-headerBtn split dropdown">
+													<div class="listgrid-title">Manufacturer Name</div>
+												</div></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product,iterationStatus: ${productCatalogList}">
+											<td><center> <span
+													th:text="${iterationStatus.count}"></span> </center></td>
+
+											<td><a
+												th:href="'/admin/productCatalog/getProductCatalogForEdit?id='+${product.productCatalogId}"
+												title="Click to view additional information on this mainSubCategory">
+													<span th:text="${product.manufacturerPart}"></span>
+											</a></td>
+											<td><span th:text="${product.semikartPart}"></span></td>
+											<td><img th:src="@{${product.imageUrl}}"></img></td>
+											<td><span th:text="${product.categoryName}"></span></td>
+											<td><span th:text="${product.manufacturerName}"></span></td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+
+
+
+						</div>
+					</div>
+				</div>
+				</section>
+			</div>
+
+
+
+		</div>
+
+	</div>
+
+	<footer> <script>
+		//<![CDATA[
+		window.jQuery
+				|| document
+						.write('<script src="/admin/js/lib/jquery-1.9.1.js"><\/script>');
+		//]]>
+	</script> <script>
+		var BLC_USER_PREFS = {};
+	</script> <script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.cookie.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.move.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.event.swipe.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.accordion.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.alerts.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.buttons.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.clearing.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.joyride.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.magellan.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.mediaQueryToggle.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.navigation.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.orbit.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tabs.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.tooltips.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.foundation.topbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.placeholder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mousewheel.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ba-dotimeout.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-1.10.2.custom.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/lib/plugins/jquery-ui-timepicker-addon.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.iframe-transport.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.ui.widget.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/jquery.autosize.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/plugins/spectrum.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontfamily.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontcolor.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/fontsize.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/selectasset.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/video.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/redactor/table.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/lib/redactor.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/lib/plugins/bootstrap.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/blc-conditions-builder.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/lib/plugins/typeahead.bundle.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC.js"></script> <script
+		type="text/javascript" src="/admin/js/BLC-system-property.js"></script>
+	<script type="text/javascript" src="/admin/js/blc-dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-history.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/blc-admin-breadcrumb.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/dates.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/ui/messages_en.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/accordion.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/modal.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/ui/imagezoom.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/entityForm.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/entityForm-generatedUrl.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/translations.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/assetSelector.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-operators.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/ruleBuilder-options.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/ruleBuilder.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/listGrid.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-filter.js"></script> <script
+		type="text/javascript"
+		src="/admin/js/admin/components/listGrid-paginate.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/components/typeahead.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/components/sessionTimer.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/catalog/product.js"></script>
+	<script type="text/javascript" src="/admin/js/admin/catalog/offer.js"></script>
+	<script type="text/javascript"
+		src="/admin/js/admin/catalog/category.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/menuItem.js"></script> <script
+		type="text/javascript" src="/admin/js/admin/blc-admin-init.js"></script>
+
+	</footer>
+
+
+</body>
+</html>

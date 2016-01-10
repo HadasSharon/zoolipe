@@ -1,0 +1,56 @@
+<script>
+	var loadFile = function(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('output');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+</script>
+
+<div class="row" style="overflow: scroll; height: 500px;">
+	<div align="right">
+		<blc:form id="addManufacturer" method="GET"
+			th:action="@{/manufacturer/close}">
+
+			<input type="submit" value="Close"
+				class="button small radius dark right add-main-entity" />
+		</blc:form>
+	</div>
+	<div class="twelve columns">
+
+		<blc:form id="addManufacturer" method="POST"
+			th:action="@{/manufacturer/save}" enctype="multipart/form-data">
+				<input type='hidden' id='params_' name='params' value='${params}' />
+						<input type="hidden" id="csrftoken_" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+			<table>
+				<label for="manuFacturerName"><span
+					th:utext="ManufacturerName"> </span>:</label>
+				<input id="manuFacturerName" name="manuFacturerName" type="text"
+					value="" autocomplete="off" />
+				
+				<img id="output" style="width: 100px; height: 100px;"></img>
+
+				<input type="file" name="file" id="imgInp" accept="image/*"
+					onchange="loadFile(event)" />
+
+
+
+				<label for="mid"><span th:utext="ManufacturerID"></span>:</label>
+				<input id="mid" name="mid" type="text" value="" autocomplete="off" />
+				<input type="submit" value="Save"
+					class="button small radius dark right add-main-entity" />
+
+				<!-- <button class="button small radius dark right add-main-entity"
+											data-url="/admin/manufacturer/close" type="button">
+					<i class="icon-plus"></i>&nbsp; Close
+				</button>  -->
+			</table>
+
+
+		</blc:form>
+
+	</div>
+</div>

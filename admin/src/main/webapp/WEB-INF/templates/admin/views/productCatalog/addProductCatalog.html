@@ -1,0 +1,183 @@
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+	var loadFile = function(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('output2');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+</script>
+<script type="text/javascript">
+	function PreviewImage() {
+		pdffile = document.getElementById("pdfFile").files[0];
+		pdffile_url = URL.createObjectURL(pdffile);
+		$('#viewer').attr('src', pdffile_url);
+	}
+</script>
+<div class="row" align="left" style="height: 650px;">
+
+
+	<h2>Add New Product</h2>
+
+
+	<div class="container">
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active"><a href="#home" role="tab" data-toggle="tab">
+					<icon class="fa fa-home"></icon> General
+			</a></li>
+			<li><a href="#features" role="tab" data-toggle="tab"> <icon
+						class="fa fa-home"></icon> Features And Description
+			</a></li>
+			<li><a href="#profile" role="tab" data-toggle="tab"> <i
+					class="fa fa-user"></i> Marketing
+			</a></li>
+			<li><a href="#messages" role="tab" data-toggle="tab"> <i
+					class="fa fa-envelope"></i> Image And DataSheet
+			</a></li>
+			<li><a href="#settings" role="tab" data-toggle="tab"> <i
+					class="fa fa-cog"></i> Shipping
+			</a></li>
+		</ul>
+		<blc:form id="cart_promo" method="POST"
+			th:action="@{/productCatalog/save}" enctype="multipart/form-data">
+		
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane fade active in row" id="home"
+					style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+					<div style="margin-left: 20px">
+						<h5>General</h5>
+						<csrf disabled="true" />
+						<label for="productName"><span th:utext="Product+' '">
+						</span>:</label> <input id="productName" name="productName" type="text" value=""
+							autocomplete="off" /> <label for="manufacturerPart"><span
+							th:utext="Manufacturer+' '+Part"></span>:</label> <input
+							id="manufacturerPart" name="manufacturerPart" type="text"
+							value="" autocomplete="off" /> <label for="semikartPart"><span
+							th:utext="Semikart+' '+Part"></span>:</label> <input id="semikartPart"
+							name="semikartPart" type="text" value="" autocomplete="off" /> <label
+							for="catageryId"><span th:utext="Category"></span>:</label> <select
+							id="categoryId" name="categoryId">
+							<option value="SELECT">SELECT</option>
+							<option th:each="category: ${categoryList}"
+								th:value="${category.catagoryId}"
+								th:text="${category.catagoryName}"></option>
+						</select><br /> <br /> <label><span th:utext="Manufacturer"></span>:</label>
+						<select id="manufacturerId" name="manufacturerId">
+							<option value="SELECT">SELECT</option>
+							<option th:each="manufacturer: ${manufacturerList}"
+								th:value="${manufacturer.manufacturerId}"
+								th:text="${manufacturer.manuFacturerName}"></option>
+						</select> <br /> <br /> <label><span th:utext="RoHS"></span>:<br />Complaint
+							<input type="radio" value="RoHS Compliant" name="rohs" />&nbsp;&nbsp;&nbsp;Complaint
+							by exemption<input type="radio"
+							value="RoHS Compliant By Exemption" name="rohs" /></label> <br /> <label><span
+							th:utext="Type"> </span>:</label> <input id="type" name="type"
+							type="text" value="" autocomplete="off" /> <label><span
+							th:utext="Brand"> </span>:</label> <input id="brand" name="brand"
+							type="text" value="" autocomplete="off" />
+					</div>
+				</div>
+				<div class="tab-pane fade" id="features"
+					style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+					<div style="margin-left: 20px">
+						<h5>Description And Features</h5>
+						<br /> <label for="description"><span
+							th:utext="Description"></span>:</label>
+						<div class="twelve indented-form-value">
+							<textarea class="redactor" name="description" id="description"></textarea>
+						</div>
+						<label><span th:utext="Features"></span>:</label>
+						<div class="twelve indented-form-value">
+							<textarea class="redactor" name="features" id="features"></textarea>
+						</div>
+
+					</div>
+				</div>
+				<div class="tab-pane fade" id="profile"
+					style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+					<div style="margin-left: 20px">
+						<h5>Marketing</h5>
+
+						<label><span th:utext="NewProduct"></span>:<br />Yes <input
+							type="radio" value="Y" name="isNewProduct" />&nbsp;&nbsp;&nbsp;&nbsp;No<input
+							type="radio" value="N" name="isNewProduct" /></label> <br /> <br /> <label><span
+							th:utext="Featured+' '+Product"></span>:<br />Yes <input
+							type="radio" value="Y" name="isFeaturedProduct" />&nbsp;&nbsp;&nbsp;&nbsp;No<input
+							type="radio" value="N" name="isFeaturedProduct" /></label> <br /> <br />
+
+						<label for="hotDeal"><span th:utext="HotDeal"></span>:<br />Yes
+							<input type="radio" value="Y" name="hotDeal" />No<input
+							type="radio" value="N" name="hotDeal" /></label> <br /> <br /> <label><span
+							th:utext="Popular"></span>:<br />Yes <input type="radio"
+							value="Y" name="popular" />No<input type="radio" value="N"
+							name="popular" /></label>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="messages"
+					style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+					<div style="margin-left: 20px">
+						<h5>Uplaod Image</h5>
+						<img id="output2" style="width: 100px; height: 100px;"></img> <input
+							type="file" name="imageFile" id="imgInp" accept="image/*"
+							onchange="loadFile(event)" /> <br /> <br /> <br /> <br />
+						<h5>Uplaod DataSheet</h5>
+						<div style="clear: both">
+							<iframe id="viewer" frameborder="1" scrolling="yes" width="300"
+								height="500"></iframe>
+						</div>
+						<input type="file" name="pdfFile" id="pdfFile"
+							onchange="PreviewImage();" />
+
+					</div>
+				</div>
+				<div class="tab-pane fade" id="settings"
+					style="height: 400px; width: 700px; overflow: scroll; overflow-x: hidden; overflow-y: scroll; border: 2px solid #F8F8F8; background-color: #F8F8F8">
+					<div style="margin-left: 20px">
+						<h5>Shipping</h5>
+						<label for="fullFillmentType"><span
+							th:utext="FullFillmentType"></span>: <select
+							id="fullFillmentType" name="fullFillmentType">
+								<option value="SELECT">SELECT</option>
+								<option value="Digital">Digital</option>
+								<option value="Digital">Gift Card</option>
+								<option value="Physical PickUp">Physical PickUp</option>
+								<option value="Physical PickUp or Ship">Physical PickUp
+									or Ship</option>
+								<option value="Physical Ship">Physical Ship</option>
+						</select></label> <br /> <br /> <label for="length"><span
+							th:utext="Length"></span>:</label> <input id="length" name="length"
+							type="text" value="" autocomplete="off" /> <br /> <br /> <label
+							for="width"><span th:utext="Width"></span>:</label> <input
+							id="width" name="width" type="text" value="" autocomplete="off" />
+						<br /> <br /> <label for="height"><span
+							th:utext="Height"></span>:</label> <input id="height" name="height"
+							type="text" value="" autocomplete="off" /> <br /> <br /> <label><span
+							th:utext="Dimension+' '+Units"></span>:<br />Meters <input
+							type="radio" value="meters" name="dimensionUnits" />&nbsp;&nbsp;&nbsp;&nbsp;Centi
+							Meters<input type="radio" value="centiMeters"
+							name="dimensionUnits" /> &nbsp;&nbsp;&nbsp;&nbsp;Feets <br /> <br />
+							<br /> <input type="radio" value="feets" name="dimensionUnits" /></label><label
+							for="weight"><span th:utext="Weight"></span>:</label> <input
+							id="weight" name="weight" type="text" value="" autocomplete="off" />
+						<br /> <br /> <label><span th:utext="Weight+' '+Units"></span>:<br />KG
+							<input type="radio" value="kg" name="weightUnits" />&nbsp;&nbsp;&nbsp;&nbsp;Pounds
+							<input type="radio" value="pounds" name="weightUnits" /> </label><br />
+					</div>
+				</div>
+			</div>
+			<input type="submit" value="Save"
+				class="button small radius dark right add-main-entity" />
+		</blc:form>
+
+
+	</div>
+
+</div>
