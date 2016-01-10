@@ -1,0 +1,697 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SemiKart Shopping Cart</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="images/favicon.ico" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/menu.css" type="text/css"
+	media="screen" />
+<link rel="stylesheet" href="css/jquery.mmenu.all.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jcarousel.responsive.css" />
+
+<link rel="stylesheet" href="css/responsive.css" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="css/Raksstyle1.css" rel='stylesheet' type='text/css' />
+<link type="text/css" rel="stylesheet" href="css/raksStyle.css" />
+<link type="text/css" rel="stylesheet" href="css/raksJsStyle.css" />
+
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+
+
+
+<script th:inline="javascript">
+		/*<![CDATA[*/
+	 
+		$(document).ready(function(){
+			$(window).load(function() {
+		    	var query = document.URL;
+		    	var vars = query.split("#");
+		    	//alert(vars[1]+" ---- "+(vars[1] === undefined));
+		    	if(vars[1] == undefined){
+		    		$("#shopMenu").slideDown("slow");
+		    	}else{
+		    		var res1 = vars[1].charAt(0);
+			    	var res2 = vars[1].charAt(1);
+			    	//alert(res2);
+			    	//alert(res1);
+			      	if(res1 == 1){
+			      		$("#shopMenuFinal").slideDown("slow");
+			    		//$("#panel1").slideDown("slow");
+			    	}else{
+			    		$("#shopMenu").slideDown("slow");
+			    	}
+
+			    	//$("#shopMenu").slideDown("slow");
+			    	//$("#panel1").slideDown("slow");
+
+			    	/* $("#addressCheck1").show();
+					document.getElementById("addressCheck1").innerHTML = "<img alt='Selected' title='Selected Address' src='img/selected.png' width='25px' height='25px'> "; */
+
+			    	document.getElementById("addressCheck"+res2).innerHTML = "<img alt='Selected' title='Selected Address' src='img/selected.png' width='25px' height='25px'> ";
+			    $('#cart').removeClass('disabled');
+		    	}
+			});	
+
+		    $("#flip1").click(function(){	//1.Order Summary
+		        $("#shopMenu").slideDown("slow");
+		        $("#panel1").hide();
+		        $("#shopMenuFinal").hide();
+		    });
+
+		    $("#orSum").click(function(){	//1.Order Summary (BUTTON)
+		        $("#panel1").slideDown("slow");
+		        $("#shopMenu").slideUp("slow");
+		    });
+		 
+		    $("#flip2").click(function(){	//2.Delivery Address
+		        $("#panel1").slideDown("slow");
+		        $("#shopMenu").slideUp("slow");
+		        $("#shopMenuFinal").hide();
+		    });		 
+
+		     $("#submit123").click(function(){	//2.Save & Continue (BUTTON)
+		    	$("#panel1").slideDown("slow");
+		        $("#shopMenu").hide();		        
+		    });
+
+		    $(".delAdd").on('click',function(e){	//2.Order Summary (BUTTON)		    	
+		    	if( $(cart).hasClass('disabled') ){
+		    	     e.preventDefault();
+		    	     alert('Please Select Shipping Address');
+		    	}else{
+		    		$("#shopMenuFinal").slideDown("slow");
+			        $("#panel1").slideUp("slow");
+		    	}       
+		    }); 
+		 
+		    $("#flip3").on('click',function(e){	
+		    	
+		    	//3.Final Summary
+		    	 if( $(cart).hasClass('disabled') ){
+		    	     e.preventDefault();
+		    	     alert('Please Select Shipping Address');
+		    	}else{
+		    		
+		    		$("#shopMenuFinal").slideDown("slow");
+			        $("#panel1").slideUp("slow");
+			        $("#shopMenu").hide();
+		    	}	   	
+		    });	
+
+		    $(".shippingCost").hide();
+		    /*  Disabling the checkout button  */
+		    //document.getElementById("cart").disabled = true; 
+		});		
+		/*]]>*/
+		</script>
+<th:block th:replace="/layout/partials/header"></th:block>
+</head>
+<body>
+	<br />
+	<br />
+	<br />
+	<div id="cont col-vs-12" th:if="${customer.firstName} == null">
+		<a id="modal_trigger123" th:href="@{/login}" class="btn">Login
+			Before Checkout</a>
+	</div>
+	<div id="contdummy" class="container"
+		th:if="${customer.firstName} != null">
+		<div id="flip1" class="collapse-section">1. ORDER SUMMARY</div>
+
+		<div class="shopMenu table-responsive" id="shopMenu">
+			<table>
+
+				<!-- <caption align="top" ><b>Shopping Cart Contents</b></caption> -->
+
+				<tr style="color: white;" bgcolor="#bb4c41">
+					<th>Manufacturer Part</th>
+					<th>Supplier</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Vat</th>
+					<th>Sub-Total</th>
+				</tr>
+				<tr th:each="cartProducts,counter : ${session.ProductsInCart}">
+					<td th:text="${cartProducts.manuFacturerPart}"></td>
+
+					<td width="15%" th:text="${cartProducts.supplierName}"></td>
+					<td width="10%">&#8377;<input type="text"
+						style="border: 0; background-color: transparent;"
+						readonly="readonly" th:name="itemPrice"
+						th:id="'itemPrice'+${counter.count}"
+						th:value="${cartProducts.price}" />
+
+					</td>
+					<td width="25%"><input type="hidden" id="maxValuex"
+						value="stockFin" /> <input type="number" th:name="quantity"
+						th:id="'quantity'+${counter.count}" min="1" step="1"
+						th:value="${cartProducts.quantity}"
+						th:onchange="'calCulateItemPrice(\'' + ${counter.count} + '\');'" />
+						<div>
+							<p>
+								<font color="green"><span
+									th:text="${cartProducts.quantity}"></span> Ships by Standard
+									Delivery</font>
+							</p>
+						</div>
+						<div class="qtyCheckError" id="qtyCheckError"></div></td>
+					<td th:text="${cartProducts.vat}+'%'"></td>
+					<td width="12%">&#8377; <input type="text"
+						style="border: 0; background-color: transparent;"
+						th:name="itemTotalPrice" th:id="'itemTotalPrice'+${counter.count}"
+						th:value="${cartProducts.totalPrice}" readonly="readonly" />
+					</td>
+
+					<td width="3%"><input type="hidden" id="idValue" value="" />
+						<a
+						th:href="'removeFromCart?manufacturerPart='+${cartProducts.manuFacturerPart}"
+						title="Click to view additional information on this mainCategory">
+							<img alt="Remove" style="cursor: pointer;" title="Remove Item"
+							src="img/close.png" />
+					</a></td>
+				</tr>
+
+				<tr>
+					<th align="center" colspan="5" style="text-align: right;">Total</th>
+
+					<td>&#8377;<input type="text"
+						style="border: 0; background-color: transparent;"
+						th:name="grandTotal" th:id="grandTotal"
+						th:value="${session.grandTotal}" readonly="readonly" /></td>
+				</tr>
+			</table>
+
+			<div style="margin: 20px 0 0;">
+				<button id="orSum">Continue</button>
+			</div>
+
+		</div>
+
+		<div id="flip2" class="collapse-section">2. DELIVERY ADDRESS</div>
+		<div id="panel1">
+			<div id="addressContainer">
+
+				<div id="addres"
+					th:each="addressObj,counter : ${customerAddressVOs}">
+					<input type="hidden" name="addId" id="'addId'+${counter.count}"
+						value="${addressObj.customerAddressId}" />
+					<div id="addressRemove" class="addressRemove">
+						<a
+							th:href="'removeAddress?customerAddressId='+${addressObj.customerAddressId}"
+							title="Click to view additional information on this mainCategory">
+							<img alt="Remove" style="cursor: pointer;" title="Remove Address"
+							src="img/dustbin.png" width="20px" height="20px" />
+						</a> <img alt="Edit"
+							th:onclick="'editFunction(\'' + ${counter.count} + '\');'"
+							style="cursor: pointer;" title="Edit Address" src="img/edit.png"
+							width="20px" height="20px" /> <br /> <br />
+						<div id="'modal'+${counter.count}" class="popupContainer2"
+							style="display: none; top: 50px;">
+							<header class="popupHeader2">
+								<span class="header_title2+${counter.count}">EDIT
+									SHIPPING ADDRESS </span> <span class="modal_close2"><i
+									class="fa fa-times"></i></span>
+							</header>
+							<section class="popupBody2">
+
+								<!-- Register Form -->
+
+								<div class="user_register2" id="user_register2">
+									<form name="myform" id="myform" action="UpdateCustShipAddress"
+										method="post">
+
+										<table>
+											<tr>
+												<td><label>First Name</label></td>
+												<td><input type="hidden" th:value="${customer.id}"
+													th:name="${id}" /> <input type="text"
+													th:value="${customer.firstName}" th:name="${firstName}"
+													placeholder="First and last name" maxlength="30"
+													pattern="[a-zA-Z ]+" /></td>
+											</tr>
+											<tr>
+												<td><label>Last Name</label></td>
+												<td><input type="text" th:value="${customer.lastName}"
+													th:name="${lastName}" placeholder="First and last name"
+													maxlength="30" pattern="[a-zA-Z ]+" /></td>
+											</tr>
+											<tr>
+												<td><label>Phone</label></td>
+												<td><input type="text" th:name="phonePrimary"
+													maxlength="10"
+													title="Please enter a ten digit phone number"
+													pattern="[0-9]{10}" /></td>
+											</tr>
+
+											<tr>
+												<td><label>Address Lane1</label></td>
+												<td><input type="text" th:name="addressLine1"
+													maxlength="80" title="Plz enter address" /></td>
+
+											</tr>
+											<tr>
+												<td><label>Address Lane2</label></td>
+												<td><input type="text" th:name="addressLine1"
+													maxlength="80" title="Plz enter address" /></td>
+
+											</tr>
+											<tr>
+												<td><label>Address Lane3</label></td>
+												<td><input type="text" th:name="addressLine3"
+													maxlength="80" title="Plz enter address" /></td>
+
+											</tr>
+											<tr>
+												<td><label>City / State</label></td>
+												<td><input type="text" id="city" name="city"
+													pattern="[a-zA-Z ]+" maxlength="30" /></td>
+											</tr>
+											<tr>
+												<td><label>Pincode</label></td>
+												<td><input type="text" maxlength="6"
+													onchange="myFunction(this.value)" name="postalCode"
+													id="pincode" pattern="[0-9]{6}"
+													title="Plz enter valid pincode"
+													placeholder="Enter Pin Code" /></td>
+											</tr>
+											<tr>
+												<td><label>Address Name</label></td>
+												<td><input type="text" th:name="addressName"
+													maxlength="80" title="Plz enter address" /></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><div class="action_btns">
+														<div>
+															<input type="submit" id="submit123" class="btn btn_red"
+																value="Save  Continue" />
+														</div>
+													</div></td>
+											</tr>
+										</table>
+									</form>
+								</div>
+							</section>
+						</div>
+					</div>
+					<div th:id="'addressCheck'+${counter.count}" class="addressCheck"></div>
+					<div id="addressArray" style="cursor: pointer;">
+						<input type="hidden" name="custId" id="custId"
+							value="${customer.id}" /> <input type="hidden"
+							name="custPincode" id="custPincode" value="" />
+						<header class="popupHeader7">
+							<span class="header_title1"
+								th:text="${customer.firstName}+'  '+${customer.lastName}"></span>
+						</header>
+						<table style="width: 100%; height: 200px; text-align: center;">
+							<tr></tr>
+							<tr>
+								<td style="height: 45px; border-top: 1px solid #B69E7E;"><span
+									th:text="${addressObj.addressLane1}"></span> <br /> <span
+									th:text="${addressObj.addressLane2}"></span> <br /> <span
+									th:text="${addressObj.addressLane3}"></span> <span
+									th:text="${addressObj.city}"></span> <span
+									th:text="'-'+${addressObj.postalCode}"></span></td>
+							</tr>
+							<tr>
+								<td style="height: 45px; border-top: 1px solid #B69E7E;"
+									th:text="${addressObj.city}"></td>
+							</tr>
+							<tr>
+								<td style="height: 45px; border-top: 1px solid #B69E7E;"
+									th:text="'Mobile:'+${addressObj.phone}"></td>
+							</tr>
+							<tr>
+								<td style="height: 40px; border-top: 1px solid #B69E7E;"><a
+									th:onclick="'selectAddess(\'' + ${counter.count} + '\');'"><span
+										id="delvHere">Delivery Here</span></a> <input type="hidden"
+									th:name="phoneNo" th:value="${addressObj.phone}"
+									th:id="'phone'+${counter.count}" /> <input type="hidden"
+									th:name="customerAddressId"
+									th:value="${addressObj.customerAddressId}"
+									th:id="'customerAddressId'+${counter.count}" /> <input
+									type="hidden" th:name="shippingCost"
+									th:value="${addressObj.shippingCost}"
+									th:id="'shippingCost'+${counter.count}" /></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<input type="hidden" id="iCount" value="" />
+			</div>
+			<div id="addNew">
+				<a id="modal_trigger" href="#modal" class="btn">+ ADD NEW
+					ADDRESS</a>
+			</div>
+			<div id="modal" class="popupContainer"
+				style="display: none; top: 50px;">
+				<header class="popupHeader">
+					<span class="header_title">ENTER A NEW SHIPPING ADDRESS</span> <span
+						class="modal_close"><i class="fa fa-times"></i></span>
+				</header>
+				<section class="popupBody">
+					<!-- Register Form -->
+					<div class="user_register">
+						<blc:form th:action="@{/addNewAddress}" method="post">
+							<table>
+								<tr>
+									<td><label>First Name</label></td>
+									<td><input type="hidden" th:value="${customer.id}"
+										th:name="${id}" /> <input type="text"
+										th:value="${customer.firstName}" th:name="${firstName}"
+										placeholder="First and last name" maxlength="30"
+										pattern="[a-zA-Z ]+" /></td>
+								</tr>
+								<tr>
+									<td><label>Last Name</label></td>
+									<td><input type="text" th:value="${customer.lastName}"
+										th:name="${lastName}" placeholder="First and last name"
+										maxlength="30" pattern="[a-zA-Z ]+" /></td>
+								</tr>
+								<tr>
+									<td><label>Phone</label></td>
+									<td><input type="text" th:name="phonePrimary"
+										maxlength="10" title="Please enter a ten digit phone number"
+										pattern="[0-9]{10}" /></td>
+								</tr>
+
+								<tr>
+									<td><label>Address Lane1</label></td>
+									<td><input type="text" th:name="addressLine1"
+										maxlength="80" title="Plz enter address" /></td>
+
+								</tr>
+								<tr>
+									<td><label>Address Lane2</label></td>
+									<td><input type="text" th:name="addressLine1"
+										maxlength="80" title="Plz enter address" /></td>
+
+								</tr>
+								<tr>
+									<td><label>Address Lane3</label></td>
+									<td><input type="text" th:name="addressLine3"
+										maxlength="80" title="Plz enter address" /></td>
+
+								</tr>
+								<tr>
+									<td><label>City / State</label></td>
+									<td><input type="text" id="city" name="city"
+										pattern="[a-zA-Z ]+" maxlength="30" /></td>
+								</tr>
+								<tr>
+									<td><label>Pincode</label></td>
+									<td><input type="text" maxlength="6"
+										onchange="myFunction(this.value)" name="postalCode"
+										id="pincode" pattern="[0-9]{6}"
+										title="Plz enter valid pincode" placeholder="Enter Pin Code" /></td>
+								</tr>
+								<tr>
+									<td><label>Address Name</label></td>
+									<td><input type="text" th:name="addressName"
+										maxlength="80" title="Plz enter address" /></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><div class="action_btns">
+											<div>
+												<input type="submit" id="submit123" class="btn btn_red"
+													value="Save  Continue" />
+											</div>
+										</div></td>
+								</tr>
+							</table>
+						</blc:form>
+					</div>
+				</section>
+			</div>
+
+
+			<div class="continue" style="display: inline-block;">
+				<button class="delAdd">Continue</button>
+			</div>
+		</div>
+		<div id="flip3" class="collapse-section">3. FINAL SUMMARY</div>
+		<div class="shopMenu table-responsive" id="shopMenuFinal">
+			<div id="printQuotation">
+				<a href="printQuotation.jsp" target="_blank">Print Quotation</a>
+			</div>
+			<table>
+				<tr style="color: white;" bgcolor="#bb4c41">
+					<th>Manufacturer Part</th>
+					<th>Supplier</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Vat</th>
+					<th>Sub-Total</th>
+				</tr>
+
+				<tr th:each="cartProducts,counter : ${session.ProductsInCart}">
+
+					<td th:text="${cartProducts.manuFacturerPart}"></td>
+
+					<td width="15%" th:text="${cartProducts.supplierName}"></td>
+					<td width="10%">&#8377;<input type="text"
+						style="border: 0; background-color: transparent;"
+						readonly="readonly" th:name="finalItemPrice"
+						th:id="'finalItemPrice'+${counter.count}"
+						th:value="${cartProducts.price}" />
+
+					</td>
+					<td width="25%"><input type="text"
+						style="border: 0; background-color: transparent;"
+						th:name="finalQuantity" th:id="'finalQuantity'+${counter.count}"
+						th:value="${cartProducts.quantity}" readonly="readonly" /></td>
+					<td th:text="${cartProducts.vat}+'%'"></td>
+					<td width="12%">&#8377; <input type="text"
+						style="border: 0; background-color: transparent;"
+						th:name="finalItemTotalPrice"
+						th:id="'finalItemTotalPrice'+${counter.count}"
+						th:value="${cartProducts.totalPrice}" readonly="readonly" />
+					</td>
+				</tr>
+				<tr>
+					<th align="center" colspan="5" style="text-align: right;">Shipping
+						Cost</th>
+					<td>&#8377;<input type="text"
+						style="border: 0; background-color: transparent;"
+						readonly="readonly" th:name="finalShippingCost"
+						th:id="finalShippingCost" /></td>
+				</tr>
+				<tr>
+					<th align="center" colspan="5" style="text-align: right;">Total</th>
+					<td style="color: #ed6347; font-weight: bold;">&#8377;<input
+						type="text" style="border: 0; background-color: transparent;"
+						readonly="readonly" th:name="finalGrandTotal"
+						th:id="finalGrandTotal" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="shopGate">
+			<blc:form th:action="@{/redirtToPaymentgateWay}" method='POST'>
+				<input type="hidden" th:name="firstName"
+					th:value="${customer.firstName}" />
+				<input th:each="cartProducts,counter : ${session.ProductsInCart}"
+					type="hidden" th:name="manuFacturerPart"
+					th:value="${cartProducts.manuFacturerPart}"
+					th:id="'manuFacturerPart'+${counter.count}" />
+
+				<input th:each="cartProducts : ${session.ProductsInCart}"
+					type="hidden" th:name="price" th:value="${cartProducts.price}" />
+
+				<input th:each="cartProducts : ${session.ProductsInCart}"
+					type="hidden" th:name="vat" th:value="${cartProducts.vat}" />
+
+				<input th:each="cartProducts,counter : ${session.ProductsInCart}"
+					type="hidden" th:name="quantityOrdered"
+					th:id="'quantityOrdered'+${counter.count}"
+					th:value="${cartProducts.quantity}" />
+
+				<input th:each="cartProducts,counter : ${session.ProductsInCart}"
+					type="hidden" th:name="supplierId"
+					th:value="${cartProducts.supplierName}"
+					th:id="'supplierId'+${counter.count}" />
+
+				<input th:each="cartProducts,counter : ${session.ProductsInCart}"
+					type="hidden" th:name="totalPrice"
+					th:value="${cartProducts.totalPrice}"
+					th:id="'totalPrice'+${counter.count}" />
+
+
+				<input type="hidden" th:name="orderTotal" th:id="orderTotal"
+					th:value="0" />
+				<input type="hidden" th:name="totalShipping" th:id="totalShipping"
+					th:value="0" />
+				<input type="hidden" th:name="orderSubtotal" th:id="orderSubtotal"
+					th:value="0" />
+				<input type="hidden" th:name="customerId" th:value="${customer.id}" />
+
+				<input type="hidden" name="lastName" th:value="${customer.lastName}" />
+				<!-- <input type="hidden" th:name="amount" th:value="1" /> -->
+				<input type="hidden" th:name="email"
+					th:value="${customer.emailAddress}" />
+				<input type="hidden" th:name="phoneNo" th:id="phoneNo" />
+				<input type="hidden" th:name="shippingCost" th:id="shippingCost" />
+				<input type="hidden" th:name="customerAddressId"
+					th:id="customerAddressId" />
+
+
+				<input type="submit" id="cart" value="Check Out" class="disabled" />
+			</blc:form>
+			<a href="index.jsp">Continue Shopping</a>
+		</div>
+		<th:block th:replace="/layout/partials/footer"></th:block>
+	</div>
+	
+
+	<!--  start of footer  -->
+
+	<!--  end of footer  -->
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		 function selectAddess(index){
+		
+			 document.getElementById("phoneNo").value= document.getElementById("phone"+index).value;
+			 document.getElementById("customerAddressId").value= document.getElementById("customerAddressId"+index).value;
+			 document.getElementById("shippingCost").value= document.getElementById("shippingCost"+index).value;
+			 $("#addressCheck"+index).show();
+			 document.getElementById("addressCheck"+index).innerHTML = "<img alt='Selected' title='Selected Address' src='img/selected.png' width='25px' height='25px' /> ";
+			  $('#cart').removeClass('disabled');
+			  document.getElementById("finalShippingCost").value=document.getElementById("shippingCost").value;
+			  document.getElementById("finalGrandTotal").value=(parseFloat(document.getElementById("grandTotal").value)+ parseFloat( document.getElementById("finalShippingCost").value)).toFixed(2);
+			  
+			  
+			 
+				document.getElementById("orderSubtotal").value=document.getElementById("grandTotal").value;
+				document.getElementById("totalShipping").value= document.getElementById("finalShippingCost").value;
+				document.getElementById("orderTotal").value=document.getElementById("finalGrandTotal").value;
+			
+		}          
+		function calCulateItemPrice(index){
+	//alert(index);
+			
+		//	alert( document.getElementById("itemPrice"+index).value);
+		var oldTotalItemPrice=parseFloat( document.getElementById("itemTotalPrice"+index).value);
+		var totalItemPrice=((parseFloat( document.getElementById("itemPrice"+index).value))*(parseFloat( document.getElementById("quantity"+index).value)));
+		document.getElementById("itemTotalPrice"+index).value=totalItemPrice.toFixed(2);
+		document.getElementById("finalItemTotalPrice"+index).value=totalItemPrice.toFixed(2);
+		var grandTotal=(parseFloat(document.getElementById("grandTotal").value))+(parseFloat(document.getElementById("itemTotalPrice"+index).value));
+		document.getElementById("grandTotal").value=(grandTotal-oldTotalItemPrice).toFixed(2);
+		document.getElementById("finalQuantity"+index).value=document.getElementById("quantity"+index).value;
+		
+		document.getElementById("finalGrandTotal").value=(parseFloat(document.getElementById("grandTotal").value)+ parseFloat( document.getElementById("finalShippingCost").value)).toFixed(2);
+		
+		
+		//////////////////////
+		document.getElementById("quantityOrdered"+index).value=document.getElementById("quantity"+index).value;
+		document.getElementById("totalPrice"+index).value=document.getElementById("itemTotalPrice"+index).value.value;
+		
+		
+		
+		document.getElementById("orderSubtotal").value=document.getElementById("grandTotal").value;
+		document.getElementById("totalShipping").value= document.getElementById("finalShippingCost").value;
+		document.getElementById("orderTotal").value=document.getElementById("finalGrandTotal").value;
+		
+		
+
+		
+		}           
+		           
+
+
+	/*   Adding Address   */
+	function myFunction(val) {
+	    //alert("The input value has changed. The new value is: " + val);
+	    //alert("potato".includes("to"));
+	    $.get('PincodeCart',{pincode:val},function(responseText) { //city name
+	    	var city = responseText;
+	    	if(city == "No"){
+	    		alert("Enter Proper Pin Code");
+	    	}else{
+	    		document.getElementById("city").value = responseText; 
+	    	}  	        
+      	}); 
+	    
+	    $.post('PincodeCart',{pincode:val},function(responseText) { // state name
+	    	var city = responseText;
+	    	if(city == "No"){
+	    		//alert("Enter Proper Pin Code");
+	    	}else{
+	    		document.getElementById("state").value = responseText; 
+	    	}  	       
+      	});
+	    
+	}
+	
+	/*   Editing Address   */
+	function myFunction1(m) {
+	    var pincode = document.getElementById("pincode"+m).value;
+	    //alert(m+' --- '+pincode);
+	    $.get('PincodeCart',{pincode:pincode},function(responseText) { //city name
+	    	var city = responseText;
+	    	if(city == "No"){
+	    		alert("Enter Proper Pin Code");
+	    	}else{
+	    		document.getElementById("city"+m).value = responseText; 
+	    	}  	        
+      	}); 
+	    
+	    $.post('PincodeCart',{pincode:pincode},function(responseText) { // state name
+	    	var city = responseText;
+	    	if(city == "No"){
+	    		//alert("Enter Proper Pin Code");
+	    	}else{
+	    		document.getElementById("state"+m).value = responseText; 
+	    	}  	       
+      	});
+	    
+	}
+	
+
+	<!-- Adding New Address   -->
+
+	$("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+		$(".modal_trigger2").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close2" });
+	
+	$(function(){
+		// Calling Register Form
+		$("#modal_trigger").click(function(){
+			$(".user_register").show();
+			$(".header_title").text('Enter a new shipping address');
+			return false;
+		});
+		
+		$(".modal_trigger2").click(function(){
+			/* $(".user_register2").show();
+			$(".header_title2").text('Edit shipping address');
+			return false; */
+		});
+	});
+	<!-- Editing Address   -->
+	function editFunction(m){
+		alert(m);
+		$(".user_register2"+m).show();
+		/* $(".header_title2"+m).text('Edit shipping address'); */
+	}
+	/*]]>*/
+	</script>
+	
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+
+<div class="row" style="overflow: scroll; height: 500px;">
+	<div align="right">
+		<blc:form id="addSupplier" method="GET" th:action="@{/supplier/close}">
+
+			<input type="submit" value="Close"
+				class="button small radius dark right add-main-entity" />
+		</blc:form>
+	</div>
+	<div class="twelve columns">
+
+		<blc:form id="addSupplier" method="POST" th:action="@{/supplier/save}">
+			<table>
+				<label for="supplierName"><span th:utext="SupplierName">
+				</span>:</label>
+				<input id="supplierName" name="supplierName" type="text" value=""
+					autocomplete="off" />
+
+				<label for="supplierAddress"><span
+					th:utext="SupplierAddress"> </span>:</label>
+				<textarea class="form-control" rows="2" style="margin-top: 10px;"
+					placeholder="Sonstige Bemerkungen" name="supplierAddress">
+    </textarea>
+
+
+				<label for="supplierPhone"><span th:utext="SupplierPhone"></span>:</label>
+				<input id="supplierPhone" name="supplierPhone" type="text" value=""
+					autocomplete="off" />
+				<label for="supplierEmail"><span th:utext="supplierEmail"></span>:</label>
+				<input id="supplierEmail" name="supplierEmail" type="text" value=""
+					autocomplete="off" />
+				<input type="submit" value="Save"
+					class="button small radius dark right add-main-entity" />
+
+				<!-- <button class="button small radius dark right add-main-entity"
+											data-url="/admin/supplier/close" type="button">
+					<i class="icon-plus"></i>&nbsp; Close
+				</button>  -->
+			</table>
+
+
+		</blc:form>
+
+	</div>
+</div>

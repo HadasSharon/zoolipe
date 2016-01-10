@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta charset="utf-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="description" content="" />
+
+<meta name="author" content="" />
+
+<link rel="icon" href="img/favicon.ico" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/menu.css" type="text/css"
+	media="screen" />
+<link rel="stylesheet" href="css/jquery.mmenu.all.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jcarousel.responsive.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="css/raksStyle.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<link rel="stylesheet" href="css/menu.css" type="text/css"
+	media="screen" />
+<link rel="stylesheet" href="css/responsiveslides.css" />
+<link rel="stylesheet" href="css/search.css" type="text/css"
+	media="screen" />
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link href="css/Raksstyle1.css" rel='stylesheet' type='text/css' />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.mmenu.min.all.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="js/jcarousel.responsive.js"></script>
+<script src="js/custom.js"></script>
+
+<!--webfonts-->
+
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700'
+	rel='stylesheet' type='text/css' />
+
+<!--//webfonts-->
+
+
+
+</head>
+
+<body style="background: #f5f5f5;">
+
+
+	<!--login-form-->
+
+	<div class="sign-logo1">
+
+		<!-- <h1 style="color:black"> -->
+
+		<span class="register-with"> Register with </span> <a href="index.jsp"><img
+			src="img/logo.png" width="220" height="70" /></a>
+
+		<!-- </h1> -->
+
+	</div>
+
+	<div class="container">
+
+		<div class="form">
+
+			<blc:form id="registrationForm" th:object="${registrationForm}"
+				th:action="@{/register}" method="post" class="clearfix" action="#">
+				<input type="hidden" th:field="*{redirectUrl}" />
+				<p class="contact">
+
+					<label for="email">Email</label>
+
+				</p>
+				<span class="error"
+					th:if="${#fields.hasErrors('customer.emailAddress')}"
+					th:errors="*{customer.emailAddress}"></span>
+				<input id="email" name="email" placeholder="example@domain.com"
+					type="email" th:field="*{customer.emailAddress}" class="field50"
+					th:classappend="${#fields.hasErrors('customer.emailAddress')}? 'fieldError'" />
+				<input type="button" id="submit" value="Check Availability" />
+				<p class="contact">
+
+					<label for="name">First Name</label>
+
+				</p>
+
+
+				<span class="error"
+					th:if="${#fields.hasErrors('customer.firstName')}"
+					th:errors="*{customer.firstName}"></span>
+				<input type="text" th:field="*{customer.firstName}" class="field50"
+					th:classappend="${#fields.hasErrors('customer.firstName')}? 'fieldError'"
+					placeholder="First and last name" />
+
+				<p class="contact">
+
+					<label for="name">Last Name</label>
+
+				</p>
+
+
+				<span class="error"
+					th:if="${#fields.hasErrors('customer.lastName')}"
+					th:errors="*{customer.lastName}"></span>
+				<input type="text" th:field="*{customer.lastName}" class="field50"
+					th:classappend="${#fields.hasErrors('customer.lastName')}? 'fieldError'"
+					placeholder="Last name" />
+
+				<div id="raksRight" class="hide11"
+					style="margin-top: 0px !important;">
+
+					<!-- Username -->
+
+				</div>
+
+				<p class="contact">
+
+					<label for="password">Create a password</label>
+
+				</p>
+
+				<input type="password" id="password" th:field="*{password}"
+					title="Password must contain at least 6 characters, including UPPER/lowercase and numbers with special characters."
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />
+
+				<p class="contact">
+
+					<label for="repassword">Confirm your password</label>
+
+				</p>
+
+				<input type="password" id="repassword" th:field="*{passwordConfirm}"
+					title="Please enter the same Password as above."
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />
+
+
+				<div class="form-action">
+
+				<!-- 	<input class="buttom" name="submit" id="submit" tabindex="5"
+						value="Sign me up!" type="submit" th:value="#{register.register}" /> -->
+
+				
+						<input  type="submit"  name="submit" id="submit"
+							th:value="#{register.register}" class="buttom"/>
+					
+					<span class="already-member"> Already a member with us? </span> <span
+						class="login-link"> <a th:href="@{/login}">Login</a>
+
+					</span>
+
+				</div>
+
+			</blc:form>
+
+		</div>
+
+	</div>
+
+
+
+	<!-- <script>
+		$(document).ready(function() {
+
+			$(window).keydown(function(event) {
+
+				if (event.keyCode == 13) {
+
+					event.preventDefault();
+
+					return false;
+
+				}
+
+			});
+
+		});
+
+		$(function() {
+
+			$("div.hide11").hide();
+
+		});
+
+		$(document)
+				.ready(
+						function() {
+
+							$('#submit')
+									.click(
+											function(event) {
+
+												var em = document
+														.getElementById("email").value;
+
+												var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+												if (filter.test(em)) { // || em !== "" && em !== undefined) {
+
+													var email = $('#email')
+															.val();
+
+													//alert(email);
+
+													$("div.hide11").show();
+
+													$.get('Registration', {
+														email : email
+													}, function(responseText) {
+
+														$('#raksRight').text(
+																responseText);
+
+													});
+
+												} else {
+
+													$("div.hide11").hide();
+
+													document
+															.getElementById("email");
+
+													alert('Please provide a valid email address');
+
+												}
+
+											});
+
+						});
+	</script> -->
+
+
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+
+	<script src="js/mobile-menu/jquery.mmenu.min.all.js"
+		type="text/javascript"></script>
+
+	<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+
+	<script type="text/javascript" src="js/jcarousel.responsive.js"></script>
+
+	<script src="js/custom.js"></script>
+
+</body>
+
+<!-- this should go after your </body> -->
+
+<script src="js/jquery.js"></script>
+
+<script src="js/jquery.datetimepicker.js"></script>
+
+
+
+</html>

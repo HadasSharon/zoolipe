@@ -1,0 +1,721 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="img/favicon.ico" />
+<title>Semikart</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/menu.css" type="text/css"
+	media="screen" />
+<link rel="stylesheet" href="css/jquery.mmenu.all.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/jcarousel.responsive.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+
+<th:block th:replace="/layout/partials/header"></th:block>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+
+
+</head>
+<br />
+<br />
+<body class="front" th:onload="'notify(\'' + ${addedToCart} + '\');'">
+	<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0;
+	list-style-type: none;
+}
+
+body {
+	background: #E9F0F5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	margin: 0px;
+	padding: 0px;
+}
+
+html {
+	background-color: #E9F0F5;
+}
+
+img {
+	border: none;
+}
+
+h3 {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #333;
+	letter-spacing: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+p {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	line-height: 22px;
+}
+
+.demo {
+	margin: 0 auto;
+	width: 600px;
+}
+
+.tickul li {
+	line-height: 24px;
+}
+/* zoom-section */
+.zoom-section {
+	clear: both;
+	margin-top: 20px;
+}
+
+* html .zoom-section {
+	display: inline;
+	clear: both;
+}
+
+.zoom-desc {
+	float: left;
+	margin-left: 10px;
+	width: 310px;
+	margin-bottom: 20px;
+}
+
+.zoom-small-image {
+	border: 4px solid #CCC;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.zoom-tiny-image {
+	border: 1px solid #CCC;
+	margin: 0px;
+}
+
+.zoom-tiny-image:hover {
+	border: 1px solid #C00;
+}
+</style>
+	<link href="css/cloud-zoom.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="js/cloud-zoom.1.0.2.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-notify.js"></script>
+
+
+
+	<div class="container-fluid container_topbar">
+
+		<div id="header" class="container">
+			<img alt='logo' th:src="${productDetail.manuFacturerLogo}" />
+			<div class="product_details-wrap row">
+				<div class="product_img col-xs-12 col-sm-4 col-md-4 col-lg-4">
+					<div class="zoom-section">
+						<div class="vendor-image"></div>
+						<!-- <div class="product-image">
+						<img th:src="${productDetail.imageUrl}" />
+					</div> -->
+					</div>
+
+					<div class="zoom-section">
+						<div class="zoom-small-image">
+							<a th:href="${productDetail.imageUrl}" class='cloud-zoom'
+								rel="tint:'#ff0000',tintOpacity:0.5,smoothMove:5,zoomWidth:300,adjustY:-4,adjustX:30"><img
+								th:src="${productDetail.imageUrl}"
+								th:title="${productDetail.description}" alt='' /></a>
+						</div>
+						<div class="zoom-desc"></div>
+					</div>
+
+					<!-- <div class="zoom-section">
+		<div class="zoom-small-image">
+			<a th:href="${productDetail.imageUrl}" class='cloud-zoom' rel="position:'inside',showTitle:false,adjustX:-4,adjustY:-4"><img th:src="${productDetail.imageUrl}" title="Your caption here" alt=''/></a>
+		</div>
+		<div class="zoom-desc">
+
+	</div>
+	</div> -->
+
+
+				</div>
+				<div class="product_details col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+					<table>
+						<tr>
+
+							<td><b>Semikart Part:</b></td>
+
+							<td th:text="${productDetail.semikartPart}"></td>
+
+						</tr>
+
+						<tr>
+
+							<td><b>Manufacturer Part:</b></td>
+
+							<td th:text="${productDetail.manufacturerPart}"></td>
+
+						</tr>
+
+						<tr>
+
+							<td><b>Manufacturer:</b></td>
+
+							<td th:text="${productDetail.manufacturerName}"></td>
+
+						</tr>
+
+						<tr>
+
+							<td><b>Category:</b></td>
+
+							<td th:text="${productDetail.categoryName}"></td>
+
+						</tr>
+
+						<tr>
+
+							<td><b>Description:</b></td>
+
+							<td th:text="${productDetail.description}"></td>
+
+						</tr>
+
+					</table>
+					<div class="avial">
+
+						<img src="img/img-1.png" /> <a target="_blank"
+							href="${productDetail.dataSheet}" class="datasheet">Data
+							Sheet</a>
+
+					</div>
+
+
+
+
+					<div class="right_div_last">
+
+						<div class=" left col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+							<span class="delivery-image"> <img src="img/imge-2.png" />
+							</span> <span class="delivery-time"> Standard Delivery: <br />
+								Delivered in 4 - 6 days
+							</span>
+
+						</div>
+
+						<div class="right col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+							<input type="text"
+								onkeydown="if (event.keyCode == 13) document.getElementById('submit2').click()"
+								placeholder="Enter Pin Code" id="pincode" /> <input
+								type="button" value="Check" id="submit2" />
+
+						</div>
+
+					</div>
+
+
+
+					<div class="hide111" id="raksRight1" style="display: none;">
+						<!-- PINCODE ERROR -->
+					</div>
+
+					<div class="hide11" id="raksRight" style="display: none;">
+						<!-- PINCODE -->
+					</div>
+
+					<!-- <div id="raksLeft" class="hide12"> COD	</div> -->
+
+				</div>
+
+
+
+				<div class="suplyDetail table-responsive col-lg-12">
+
+					<table cellspacing="0" cellpadding="0">
+
+						<tr>
+
+							<th WIDTH="10%">Supplier</th>
+
+							<th WIDTH="15%">Availability</th>
+
+							<th WIDTH="20%">Price(INR)</th>
+
+							<th WIDTH="55%">Order</th>
+
+						</tr>
+
+
+						<tr
+							th:each="supplierCatalog,SupiterationStatus : ${productDetail.supplierCatalogList}">
+
+							<td WIDTH="10%"><img src="" width="100%" />
+
+								<center>
+
+									<p class="suply">
+
+										<span style="color: #bb4c41; font-weight: bold;"
+											th:text="${supplierCatalog.supplierName}"></span>
+
+									</p>
+
+								</center> <br /></td>
+
+							<td WIDTH="15%"><center>
+
+									<p th:text="${supplierCatalog.stock}+' In Stock'"></p>
+
+									<input type="hidden"
+										th:name="'stk'+${SupiterationStatus.count}"
+										th:value="${supplierCatalog.stock}" /> <br />
+
+
+
+								</center></td>
+
+							<td WIDTH="20%">
+
+								<table class="search_inner" cellspacing="0" border="0"
+									th:id="'tableID'+${SupiterationStatus.count}">
+									<tr
+										th:each="priceObj,PriIterationStatus: ${supplierCatalog.priceTagImplLists}">
+
+										<td style="text-align: right" colspan="1"
+											th:text="${priceObj.quentity}"></td>
+										<td th:text="'&#8377;'+${priceObj.salePrice}">&#8377; <input
+											type="hidden" th:name="'prcId'+${priceObj.price}"
+											th:id="'prcId'+${priceObj.price}"
+											th:value="${priceObj.price}" />
+										</td>
+									</tr>
+								</table>
+
+							</td>
+
+							<td WIDTH="55%"><span th:text="${productDetail.tax}"></span>
+								<br />
+
+								<div class="order">
+
+									<div class="fields">
+
+										<input type="text"
+											th:id="'quantity'+${SupiterationStatus.count}"
+											th:name="quantity" placeholder="Enter Quantity"
+											th:onChange="'setHiddenValue(\'' + ${SupiterationStatus.count} + '\');'" />
+										<input type="button" class="order_click" id="hide"
+											value="Order"
+											th:onclick="'myFunction(\'' + ${SupiterationStatus.count} + '\');'" />
+
+									</div>
+
+									<div class="quantity-info">
+
+										<p>
+											Minimum:<span th:text="${supplierCatalog.minu}"></span> <input
+												type="hidden" name="minimum"
+												th:id="'minimum'+${SupiterationStatus.count}"
+												th:value="${supplierCatalog.minu}" />
+										</p>
+
+
+										<p>
+											Multiplies:<span th:text="${supplierCatalog.mult}"></span>
+										</p>
+
+									</div>
+
+								</div>
+
+								<div th:class="'div_hideQty'+${SupiterationStatus.count}"
+									th:id="'div_hideQty'+${SupiterationStatus.count}"
+									style="color: #cc363b;"></div>
+
+								<div th:id="displayAmtDiv"
+									th:class="'div_hide'+${SupiterationStatus.count}"
+									style="display: none;">
+
+									<div class="right_div_addtocart">
+										<div class="right_div_addtocart_sub">
+											<h3>
+												<b>Order Value</b>:
+											</h3>
+											<input type="text" placeholder="TOTAL AMOUNT"
+												th:id="'mytext'+${SupiterationStatus.count}"
+												class="totalAmt" disabled="disabled" th:name="mytext" />
+
+											<p th:id="'calculation'+${SupiterationStatus.count}">(Entered
+												qty X cost per peice)</p>
+											<th:block>
+												<blc:form method="POST" th:action="@{/addToCart}">
+													<input type="hidden" th:name="manufacturerPart"
+														th:value="${productDetail.manufacturerPart}" />
+													<input type="hidden" th:name="productCatalogId"
+														th:value="${productDetail.productCatalogId}" />
+
+													<input type="hidden" th:name="totalAmt"
+														th:id="'priID'+${SupiterationStatus.count}" />
+													<input type="hidden"
+														th:name="'qty'+${SupiterationStatus.count}"
+														th:id="'txtHidden'+${SupiterationStatus.count}" />
+													<input type="hidden"
+														th:name="'desc'+${SupiterationStatus.count}"
+														th:id="'desc'+${SupiterationStatus.count}"
+														th:value="${supplierCatalog.supplierName}" />
+													<input type="hidden"
+														th:name="'price'+${SupiterationStatus.count}"
+														th:id="'price'+${SupiterationStatus.count}" />
+													<input type="hidden"
+														th:name="'vat'+${SupiterationStatus.count}"
+														th:id="'price'+${SupiterationStatus.count}"
+														th:value="${supplierCatalog.vat}" />
+													<input type="hidden"
+														th:name="'supplierId'+${SupiterationStatus.count}"
+														th:id="'supplierId'+${SupiterationStatus.count}"
+														th:value="${supplierCatalog.supplierId}" />
+
+													<!--  <input type="button" id="cart"  onclick="myFunction1()" value="Add To Cart"/> -->
+
+													<input type="submit" id="cart" value="Add To Cart" />
+													<input type="hidden" th:id="customerId"
+														th:name="customerId" th:value="${customer.Id}" />
+													<input type="hidden" id="wishListSelected"
+														name="wishListSelected" value="false" />
+
+
+													<div th:if="${customer.loggedIn}" th:remove="tag">
+														<div class="add_to_wishlist">
+															<!-- <input type="hidden" name="productId" th:value="*{id}" /> -->
+															<input type="hidden" name="quantity" value="1" /> <input
+																type="submit" id="addToWishlist"
+																value="+ Add to Wishlist"
+																onclick="javascript:submitWishlist()" />
+														</div>
+													</div>
+													<div th:if="${customer.loggedIn==false}">
+														<div class="add_to_wishlist">
+															<!-- <input type="hidden" name="productId" th:value="*{id}" /> -->
+															<input type="hidden" name="quantity" value="1" /> <input
+																type="submit" id="addToWishlist" class="gray-button"
+																value="+ Add to Wishlist"
+																alt="Login to create your wishList"
+																onclick="javascript:validate()" />
+														</div>
+													</div>
+
+												</blc:form>
+											</th:block>
+
+											<div class="right_stock" style="float: left;">
+												<p id="stockCheck"></p>
+												<input type="hidden"
+													th:id="'qtyAva'+${SupiterationStatus.count}" />
+											</div>
+										</div>
+									</div>
+								</div></td>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+			<input type="hidden" id="supCount" value="" />
+
+		</div>
+
+		<th:block th:replace="/layout/partials/footer"></th:block>
+	</div>
+
+	<!-- END MAIN CONTENT -->
+	<!-- FOOTER -->
+
+	<!-- END FOOTER -->
+	<!--  <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   -->
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.mmenu.min.all.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="js/jcarousel.responsive.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/cartOperations.js"></script>
+	<script>
+		function validate() {
+
+			alert("Please login to create wishlist");
+			document.getElementById("addToWishlist").disabled = true;
+			return false;
+		}
+		function submitWishlist() {
+			document.getElementById("wishListSelected").value = "true";
+
+			document.form[0].submit();
+		}
+	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		/* function notify(added) {
+			if(added=="true"){
+				$.notifyDefaults({
+					url_target: "_self"
+				});
+				$.notify({
+					message: "Check out my twitter account by clicking on this notification!",
+					url: "https://twitter.com/Mouse0270"
+				});
+			
+		}
+		} */
+
+		function setHiddenValue(m) {
+			var x = m;
+			//alert("HELLO");
+			//alert(document.getElementById('quantity'+x).value);
+			document.getElementById('txtHidden' + x).value = document
+					.getElementById('quantity' + x).value; //	getElementsByName('txtVisible').value;
+		}
+		/*]]>*/
+	</script>
+	<script type="text/javascript">
+		/*<![CDATA[*/
+		function myFunction1(m) {
+
+			var x = m;
+			$(".div_hideQty" + x).hide();
+			$(".div_hide" + x).hide();
+			document.getElementById("quantity" + x).value = "";
+			alert("Successfully Added to Cart");
+		}
+		/*<![CDATA[*/
+	</script>
+	<script th:inline="javascript">
+		/*_$tag____*/
+		function myFunction(m) {
+
+			document.getElementById("displayAmtDiv").style.display = "block";
+
+			var x = m;
+			var x1 = parseInt(document.getElementById("quantity" + x).value
+					.trim());
+			var stock = parseInt(document.getElementsByName('stk' + x)[0].value
+					.trim());
+			//alert(isNaN(stock));
+			if (isNaN(stock)) {
+				stock = 0;
+			}
+			var minimum = parseInt(document.getElementById("minimum" + x).value
+					.trim());
+
+			var oTable = document.getElementById("tableID" + x);
+			//gets rows of table
+			var rowLength = oTable.rows.length;
+			var allData = [];
+
+			//  Put all the price values to an Array  allData
+			var celll = oTable.rows.item(0).cells
+
+			for (var i = 0; i < rowLength; i++) {
+				//gets cells of current row  
+				var oCells = oTable.rows.item(i).cells;
+				//gets amount of cells of current row
+				var cellLength = oCells.length;
+				//loops through each cell in current row
+				var cellVal;
+				//  allData[i,0]=oCells.item(0).innerHTML;
+				allData[i, 1] = oCells.item(1).innerHTML;
+				//   allData[i,1]=;
+				allData.push(oCells.item(0).innerHTML, allData[i, 1].substring(
+						1, allData[i, 1].length));
+			}
+
+			//Splitting the values of allData and adding only values removing Rs. and :
+
+			// alert(allData.length);
+			for (var i = 0; i < allData.length; i++) {
+
+				if (i + 2 < allData.length || i + 1 < allData.length) {
+
+					if (x1 == allData[i]) {
+
+						alert(Math.round((x1 * allData[i + 1]) * 100) / 100)
+						document.getElementById("mytext" + x).value = "Rs. "
+								+ Math.round((x1 * allData[i + 1]) * 100) / 100;
+						document.getElementById("calculation" + x).innerHTML = "( "
+								+ x1 + " X &#8377;" + allData[i + 1] + " )";
+						//document.getElementById("price"+x).value = allData[i+1];
+						document.getElementById("price" + x).value = allData[i + 1]
+								.trim();
+						document.getElementById("priID" + x).value = Math
+								.round((x1 * allData[i + 1]) * 100) / 100;
+						i = i + 2;
+						exit;
+					} else if (x1 > allData[i] && x1 < allData[i + 2]) {
+
+						document.getElementById("mytext" + x).value = "Rs. "
+								+ Math.round((x1 * allData[i + 1]) * 100) / 100;
+						document.getElementById("calculation" + x).innerHTML = "( "
+								+ x1 + " X &#8377;" + allData[i + 1] + " )";
+						//document.getElementById("price"+x).value = allData[i+1];
+						document.getElementById("price" + x).value = allData[i + 1]
+								.trim();
+						//request.setAttribute("rest", allData[i+1]);
+						document.getElementById("priID" + x).value = Math
+								.round((x1 * allData[i + 1]) * 100) / 100;
+
+						i = i + 2;
+						exit;
+					} else if (x1 > allData[i] && x1 < allData[i + 2]) {
+
+						document.getElementById("mytext" + x).value = "Rs. "
+								+ Math.round((x1 * allData[i + 1]) * 100) / 100;
+						document.getElementById("calculation" + x).innerHTML = "( "
+								+ x1 + " X &#8377;" + allData[i + 1] + " )";
+						//document.getElementById("price"+x).value = allData[i+1];
+						document.getElementById("price" + x).value = allData[i + 1]
+								.trim();
+						document.getElementById("priID" + x).value = Math
+								.round((x1 * allData[i + 1]) * 100) / 100;
+
+						i = i + 2;
+						exit;
+					}
+					;
+					/* var qtAva = document.getElementById("qtyAva"+x).value;     	
+					if(qtAva == 0){}
+					else{
+						if(stock == 0){
+							
+						}else if(stock > qtAva){
+							stock = stock - qtAva;
+						}else{
+							stock = qtAva - stock;
+						}
+					}
+					if(x1 <= stock){
+						document.getElementById("stockCheck"+x).innerHTML = "_$tag_______________"+x1+" Ships Now_$tag__";	        		
+					}else{
+						var tempStk = x1 - stock; 
+					 	document.getElementById("stockCheck"+x).innerHTML = "_$tag_______________"+stock+" Ships Now_$tag__ _$ta "
+																			+ "_$tag_________________"+tempStk+" Backordered_$tag__";		
+					} */
+				}
+				if (i == allData.length - 1) {
+					document.getElementById("mytext" + x).value = "Rs. "
+							+ Math.round((x1 * allData[i]) * 100) / 100;
+					document.getElementById("calculation" + x).innerHTML = "( "
+							+ x1 + " X &#8377;" + allData[i] + " )";
+					document.getElementById("price" + x).value = allData[i];
+					document.getElementById("price" + x).value = allData[i]
+							.trim();
+					document.getElementById("priID" + x).value = Math
+							.round((x1 * allData[i + 1]) * 100) / 100;
+					exit;
+				}
+				;
+			}
+			;
+			//	alert("hiii")
+			//  } else{
+			/*	$(".div_hide"+x).hide();
+				document.getElementById("quantity"+x).value = "";
+				$(".div_hideQty"+x).show();
+				 document.getElementById("div_hideQty"+x).innerHTML = "Quantity must be Less Than Stock";
+				//alert("Quantity must be Less Than Stock");
+			};
+			}else{
+				$(".div_hide"+x).hide();
+				document.getElementById("quantity"+x).value = "";
+				$(".div_hideQty"+x).show();
+			 	document.getElementById("div_hideQty"+x).innerHTML = "Quantity must be Numeric Only";
+				//alert("Quantity must be Numeric Only");
+			};
+			}else{
+			$(".div_hide"+x).hide();
+			document.getElementById("quantity"+x).value = "";
+			$(".div_hideQty"+x).show();
+				document.getElementById("div_hideQty"+x).innerHTML = "Quantity Must Not Equal to Zero";
+			//alert("Quantity must be Numeric Only");
+			}; */
+			//} else{
+			/*$(".div_hide"+x).hide();
+			document.getElementById("quantity"+x).value = "";
+			$(".div_hideQty"+x).show();
+				document.getElementById("div_hideQty"+x).innerHTML = "Minimum Quantity Must be "+minimum;
+			//alert("Quantity must be Numeric Only");
+			};  */
+
+		}
+		/*_$t*/
+	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(function() {
+			var m = document.getElementById('supCount').value;
+			//alert("Inside function "+m);
+			for (i = 0; i < m; i++) {
+				$("div.div_hide" + (i + 1)).hide();
+			}
+			$("div.hide11").hide();
+			$("div.hide111").hide();
+			$("div.hide12").hide();
+		});
+		$(document)
+				.ready(
+						function() {
+							$('#submit2')
+									.click(
+											function(event) {
+												var numexp1 = /^[0-9]+$/;
+												if (document
+														.getElementById("pincode").value
+														.match(numexp1)
+														&& document
+																.getElementById("pincode").value.length == 6) {
+													var username = $('#pincode')
+															.val();
+													$.get('ActionServlet123', {
+														pincode : username
+													}, function(responseText) {
+														$('#raksRight').text(
+																responseText);
+													});
+													$("div.hide11").show();
+													$("div.hide111").hide();
+
+													// COD
+													//$.post('ActionServlet123',{pincode:username},function(responseText) { 
+													// $('#raksLeft').text(responseText);         
+													//});
+													$("div.hide12").show();
+												} else {
+													$("div.hide11").hide();
+													$("div.hide12").hide();
+													document
+															.getElementById('pincode').value = "";
+													$("div.hide111").show();
+													document
+															.getElementById("raksRight1").innerHTML = "Enter Proper Pincode";
+													//alert("Enter Proper Pincode");
+												}
+											});
+						});
+		/*]]>*/
+	</script>
+</body>
+</html>

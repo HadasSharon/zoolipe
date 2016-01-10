@@ -1,0 +1,68 @@
+<nav>
+	<div th:remove="all">
+		<!--
+             This template displays the navigation of the site by looking up the menu named "headerNav"
+             and building a list of the categories sub-categories menu items.
+        -->
+	</div>
+	<blc:menu resultVar="menuItems" menuName="Header Nav" />
+	<ul>
+		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">New-Products
+		</a></li>
+		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Products
+		</a>
+			<ul class="dropdown-menu navmenu-nav" role="menu">
+				<li><a href="#">Analog</a></li>
+				<li><a href="#">Sensors</a></li>
+				<li><a href="#">Semiconductors</a></li>
+				<li><a href="#">Development tools</a></li>
+				<li><a href="#">Embedded</a></li>
+				<li><a href="#">Wired</a></li>
+				<li class="wireless"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Wireless"> Wireless</a></li>
+				<li class="display"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Display"> Display</a></li>
+				<li class="opto"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Opto Electronics">
+						Opto Electronics</a></li>
+				<li class="LED-Lighting"><a
+					href="/APIEXForSemiKart/semikart?searchKey=LED Lighting"> LED
+						Lighting </a></li>
+				<li class="Circuit-Protection"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Circuit Protection">
+						Circuit Protection </a></li>
+				<li class="Clock-Timing "><a href="#">Clock And Timing </a></li>
+				<li class="power"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Power"> Power</a></li>
+				<li class="passives"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Passives">Passives </a></li>
+				<li class="Batteries"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Electromechanical">Electromechanical
+				</a></li>
+				<li class="Enclosures "><a
+					href="/APIEXForSemiKart/semikart?searchKey=Enclosures">Enclosures
+				</a></li>
+				<li class="Wires-Cables "><a
+					href="/APIEXForSemiKart/semikart?searchKey=Connectors">
+						Connectors </a></li>
+				<li class="Test-Measurement"><a href="#">Test And
+						Measurement </a></li>
+				<li class="thermal"><a href="#"> Wires And Cables</a></li>
+				<li class="Tools"><a
+					href="/APIEXForSemiKart/semikart?searchKey=Tools">Tools </a></li>
+			</ul></li>
+	</ul>
+
+
+	<!-- <ul th:if="${menuItems}">
+		<li th:each="menuItem : ${menuItems}"><a
+			th:href="@{${menuItem.url}}" th:class="${menuItemStat.first}? 'home'">
+				<span th:utext="${menuItem.label}"></span>
+		</a>
+			<ul th:if="${menuItem.submenu != null}" class="sub-menu">
+				<li th:each="submenuItem : ${menuItem.submenu}"><a
+					th:href="@{${submenuItem.url}}" th:utext="${submenuItem.label}"></a>
+				</li>
+			</ul></li>
+	</ul> -->
+</nav>

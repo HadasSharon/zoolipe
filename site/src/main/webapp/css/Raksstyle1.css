@@ -1,0 +1,271 @@
+/****-----login.jsp----****/.sign-logo {
+	font-size: 22px;
+	margin: 35px auto 20px;
+	padding: 0 15px;
+	position: relative;
+	text-align: center;
+}
+.SDlogo {
+	background: url(../images/logo.png) no-repeat 0 5px transparent;
+	height: 45px;
+	width: 150px;
+	display: block;
+	margin: 0 auto;
+	margin-left: 50px;
+}
+.login-form {
+	background: #ffffff none repeat scroll 0 0;
+	border: 3px solid #bb4c41;
+	border-radius: 6px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+	margin: 0 auto 30px;
+	max-width: 500px;
+	padding: 30px;
+	width: 100%;
+	overflow:hidden;
+}
+.login-form h1 {
+	text-align: left;
+	color: #fff;
+	font-size: 1.8em;
+	font-weight: 500;
+	font-family: 'Open Sans', sans-serif;
+	position: absolute;
+	top: 7%;
+	left: 11%;
+	margin: 34px 0;
+}
+.login1 {
+}
+.login1 li {
+}
+.login1 li input {
+	height: 42px;
+	margin: 0 0 12px;
+	width: 100%;
+	padding-left: 50px;
+	border: 1px solid #999;
+}
+.login1 input#field_username {
+	width: 100%;	
+}
+.login1 li input.user {
+	background: url("../images/user.png") no-repeat scroll 0 0;
+}
+.login1 li input.lock {
+	background: url("../images/password.png") no-repeat scroll 0 0;
+}
+.login-form .forgot {
+	clear: both;
+	padding-top: 10px;
+}
+.arrow {
+	background: url(../images/icons.png) no-repeat -62px 7px;
+	position: absolute;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {	/*font-family: 'Open Sans', sans-serif;	width: 77%;	padding: 0.5em 2em 0.5em 1em;	color: #222;	font-size: 20px;	outline: none;	border: none;	line-height: normal;*/
+}
+input#submit1 {
+	background: #a41103;
+	border: none;
+	color: #ffffff;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 8px 20px;
+}
+.forgot a.forgot-link {
+	color: #a41103;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-left: 15px;
+}/*-----start-responsive-design------*/
+@media ( max-width :1024px) {
+.login-form {
+margin: 8% auto 0;
+width: 45%;
+}
+}
+@media ( max-width :768px) {
+.login-form {
+margin: 12% auto 0;
+width: 57%;
+}
+}
+@media ( max-width :640px) {
+.login-form {
+margin: 13% auto 0;
+width: 70%;
+}
+}
+@media ( max-width :480px) {
+.login-form {
+margin: 20% auto 0;
+width: 90%;
+}
+}
+@media ( max-width :320px) {
+.login-form {
+margin: 20% auto 0;
+width: 100%;
+}
+.icon {
+}
+.login-form h1 {
+font-size: 1.7em;
+left: 35%;
+top: 0%;
+}
+.login-form h2 {
+font-size: 1em;
+right: 29%;
+top: 10%;
+}
+input[type="text"], input[type="password"] {
+font-size: 18px;
+padding: 0.4em 1em 0.45em 1em;
+15 px 2px
+}
+.forgot h3 a {
+float: none;
+font-size: 14px;
+}
+.arrow {
+background: url(../images/icons.png) no-repeat -62px -6px;
+left: 29%;
+top: 62.99%;
+}
+}/* register.jsp        */
+.sign-logo1 {
+	font-size: 22px;
+	margin: 35px auto 20px;
+	position: relative;
+	text-align: center;
+	padding: 0 15px;
+}
+.form {
+	background: #fff;
+	border: 3px solid #bb4c41;
+	border-radius: 6px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+	margin: 0 auto 30px;
+	max-width: 500px;
+	padding: 15px 25px;
+	width: 100%;
+}/* .form {    background: url(../images/bgf.png) no-repeat 100% 30%;    background-size: 100%;    width: 520px;    margin: 0 auto 4% auto;    padding-left: 50px;    padding-top: 20px;} */
+.form fieldset {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+.form p.contact {
+	line-height: normal;
+	margin: 15px 0 2px;
+}
+.form input[type="text"] {
+	width: 100%;
+}
+.form input[type="email"] {
+	width: 255px;
+}
+.form input[type="password"] {
+	width: 100%;
+}
+.form input.birthday {
+	width: 60px;
+}
+.form input.birthyear {
+	width: 120px;
+}
+.form label {
+	color: #000;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Arial, Helvetica;
+}
+.form label.month {
+	width: 135px;
+}
+.form input,
+textarea,
+select {
+	border: 1px solid #ddd;
+	font-family:  Arial;
+	color: #4b4b4b;
+	font-size: 14px;
+	margin: 2px 0;
+}
+.form input:focus,
+textarea:focus {
+	border: 1px solid #bb4c41;
+	background-color: rgba(255, 255, 255, 1);
+}
+.form .select-style {
+	margin: 0;
+}
+.form .gender {
+	max-width: 100%;
+}
+.form fieldset {
+	margin-top: 10px;
+}
+.form .form-action {
+	margin-top: 15px;
+}
+.form input.buttom {	/*background: #bb4c41;	display: inline-block;	padding: 5px 10px 6px;	color: #fbf7f7;	text-decoration: none;	font-weight: bold;	line-height: 1;	-moz-border-radius: 5px;	-webkit-border-radius: 5px;	border-radius: 5px;	-moz-box-shadow: 0 1px 3px #999;	-webkit-box-shadow: 0 1px 3px #999;	box-shadow: 0 1px 3px #999;	text-shadow: 0 -1px 1px #222;	border: none;	position: relative;	cursor: pointer;	font-size: 14px;	font-family: Verdana, Geneva, sans-serif;*/
+}/* .form input.buttom:hover	{ background-color: #2a78f6; } */
+input#username {
+	width: 255px;
+}
+div#raksRight {
+	margin-top: -22px;
+	margin-bottom: 20px;
+	color: green;
+}
+input#submit {
+	background: #a41103 none repeat scroll 0 0;
+	border: medium none;
+	border-radius: 2px;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 8px 15px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	margin: 0;
+}/*    AdminViewOrder.jsp      */
+
+table#OuterOrderTable {
+	text-align: center;
+	width: 100%;
+}
+div#exportExcel {
+	margin: 0 auto;
+	float: right;
+	margin-right: 10px;
+}
+div#exportExcel a {
+	text-decoration: none;
+	color: blue;
+}
+.form span.already-member {
+	margin: 0 10px;
+}
+.form span.login-link a {
+	color: #a41103;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.login-form .create-link {
+	color: #666666;
+	font-size: 15px;
+	text-align: center;
+	margin: 0 0 20px;
+}
+.create-link .create-acc a {
+	text-decoration: underline;
+	color: #a41103;
+}
+.heading_block h2 {
+	margin: 0 0 10px;
+}
